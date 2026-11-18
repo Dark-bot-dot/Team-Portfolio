@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects | Ritvik Reddy</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolled" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Ritvik<span class="accent">.</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link active" href="projects.html">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="skills.html">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link hub-link" href="../index.html">← Team Hub</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="container">
+      <p class="section-label">What I've built</p>
+      <h1 class="page-title">Projects.</h1>
+    </div>
+  </div>
+
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4">
+
+        <!-- Project 1 -->
+        <div class="col-12">
+          <div class="project-card card-blue">
+            <div class="row g-0">
+              <div class="col-lg-5 project-left">
+                <span class="proj-tag">NLP &middot; Web App</span>
+                <h3>NLP Resume &amp; Job Matcher</h3>
+                <p>A web app that compares a resume to a job description using TF-IDF vectorisation and cosine similarity. Shows a match score, missing skills, and relevant keywords.</p>
+                <div class="proj-tags">
+                  <span>Python</span><span>NLP</span><span>HTML/CSS</span><span>TF-IDF</span>
+                </div>
+                <a href="https://resume-matcher-gdgj.onrender.com/" target="_blank" class="app-btn mt-3">Open App ↗</a>
+              </div>
+              <div class="col-lg-7 project-right">
+                <h5>How it works</h5>
+                <div class="flow-step"><span class="step-num">01</span><div><strong>Input</strong><p>User pastes their resume text and a job description.</p></div></div>
+                <div class="flow-step"><span class="step-num">02</span><div><strong>Vectorise</strong><p>Both texts are converted to TF-IDF vectors to represent word importance.</p></div></div>
+                <div class="flow-step"><span class="step-num">03</span><div><strong>Score</strong><p>Cosine similarity gives a match percentage and highlights missing skills.</p></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="col-12">
+          <div class="project-card card-green">
+            <div class="row g-0">
+              <div class="col-lg-5 project-left">
+                <span class="proj-tag">AI / ML &middot; Internship</span>
+                <h3>Drug Discovery Platform</h3>
+                <p>Contributed to an AI-powered De Novo Drug Discovery platform at SciInv Biosciences. Worked on GitHub issues, drug database organisation, and prototype demos.</p>
+                <div class="proj-tags">
+                  <span>AI/ML</span><span>Python</span><span>GitHub</span>
+                </div>
+              </div>
+              <div class="col-lg-7 project-right">
+                <h5>Contributions</h5>
+                <div class="flow-step"><span class="step-num">01</span><div><strong>Data</strong><p>Organised verified drug info from public scientific databases.</p></div></div>
+                <div class="flow-step"><span class="step-num">02</span><div><strong>Interface</strong><p>Built a prototype interface for drug data retrieval.</p></div></div>
+                <div class="flow-step"><span class="step-num">03</span><div><strong>Collaboration</strong><p>Supported documentation and weekly team progress reviews.</p></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="col-12">
+          <div class="project-card card-purple">
+            <div class="row g-0">
+              <div class="col-lg-5 project-left">
+                <span class="proj-tag">Web &middot; Entrepreneurship</span>
+                <h3>Student Apparel Venture</h3>
+                <p>Conceptualised a student apparel brand and built a website to showcase T-shirt designs. Managed pricing, customer communication, and product presentation.</p>
+                <div class="proj-tags">
+                  <span>HTML/CSS</span><span>Web Dev</span><span>Business</span>
+                </div>
+              </div>
+              <div class="col-lg-7 project-right">
+                <h5>What I did</h5>
+                <div class="flow-step"><span class="step-num">01</span><div><strong>Design</strong><p>Collected design ideas and explored customer preferences.</p></div></div>
+                <div class="flow-step"><span class="step-num">02</span><div><strong>Website</strong><p>Built a product showcase site for the T-shirt collection.</p></div></div>
+                <div class="flow-step"><span class="step-num">03</span><div><strong>Sales</strong><p>Handled pricing, orders, and customer communication end-to-end.</p></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container text-center">
+      <p class="mb-0">&copy; 2026 M Ritvik Reddy &nbsp;|&nbsp; CS 311 Portfolio Project</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
