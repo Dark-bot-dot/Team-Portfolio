@@ -1,0 +1,72 @@
+/* Flexbox Sticky Footer: keeps footer at bottom */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+/* Hero Card */
+.hero-box {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+/* CSS Grid: 2 equal columns on desktop */
+.grid-box {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+/* Flexbox: places form and details side-by-side */
+.contact-box {
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* Card Box + CSS3 Hover Transition */
+.card-box {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  transition: transform 0.2s ease;
+}
+
+.card-box:hover {
+  transform: translateY(-4px); /* Lifts card slightly on hover */
+}
+
+/* Flexbox Skill Badges */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.tags span {
+  background: rgba(0, 0, 0, 0.06);
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+/* Light Pastel Colors for Skill Cards */
+.light-blue   { background-color: #eef6ff; }
+.light-green  { background-color: #eefbf3; }
+.light-purple { background-color: #f6f0ff; }
+.light-yellow { background-color: #fffbeb; }
+
+/* Media Query: switches to 1 column on mobile & tablet */
+@media (max-width: 768px) {
+  .grid-box {
+    grid-template-columns: 1fr;
+  }
+  .contact-box {
+    flex-direction: column;
+  }
+}
