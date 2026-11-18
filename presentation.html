@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CS 311 — Team Portfolio Presentation</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --purple: #7c3aed;
+    --purple-light: #a78bfa;
+    --teal: #0d9488;
+    --amber: #d97706;
+    --rose: #e11d48;
+    --slate: #0f172a;
+    --slate2: #1e293b;
+    --muted: #94a3b8;
+  }
+
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: #000;
+    color: #fff;
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  /* ── Slide container ── */
+  .deck {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 80px;
+    opacity: 0;
+    transform: translateX(60px);
+    transition: opacity .4s ease, transform .4s ease;
+    pointer-events: none;
+  }
+
+  .slide.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: all;
+  }
+
+  .slide.exit {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+
+  /* ── Progress bar ── */
+  #progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: var(--purple-light);
+    transition: width .4s ease;
+    z-index: 100;
+  }
+
+  /* ── Nav ── */
+  #nav {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(255,255,255,.07);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 999px;
+    padding: 10px 24px;
+    z-index: 100;
+  }
+
+  #nav button {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+    opacity: .6;
+    transition: opacity .2s;
+  }
+
+  #nav button:hover { opacity: 1; }
+  #counter { font-size: 13px; color: var(--muted); min-width: 48px; text-align: center; }
+
+  /* ── Chips ── */
+  .chip {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+  }
+  .chip-purple { background: rgba(124,58,237,.25); color: var(--purple-light); border: 1px solid rgba(124,58,237,.4); }
+  .chip-teal   { background: rgba(13,148,136,.25);  color: #2dd4bf;            border: 1px solid rgba(13,148,136,.4); }
+  .chip-amber  { background: rgba(217,119,6,.25);   color: #fbbf24;            border: 1px solid rgba(217,119,6,.4); }
+  .chip-rose   { background: rgba(225,29,72,.25);   color: #fb7185;            border: 1px solid rgba(225,29,72,.4); }
+  .chip-slate  { background: rgba(148,163,184,.1);  color: #cbd5e1;            border: 1px solid rgba(148,163,184,.2); }
+
+  /* ── Typography helpers ── */
+  .label { font-size: 12px; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .hero-title { font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 800; line-height: 1.1; }
+  .section-title { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 700; line-height: 1.15; }
+  .body-text { font-size: clamp(.95rem, 1.5vw, 1.15rem); color: #cbd5e1; line-height: 1.75; }
+  .accent { color: var(--purple-light); }
+  .accent-teal { color: #2dd4bf; }
+  .accent-amber { color: #fbbf24; }
+
+  /* ── Layout helpers ── */
+  .col-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; width: 100%; }
+  .col-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; width: 100%; }
+  .w-full { width: 100%; }
+  .text-center { text-align: center; }
+  .mt-6 { margin-top: 24px; }
+  .mt-4 { margin-top: 16px; }
+
+  /* ── Cards ── */
+  .card {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 16px;
+    padding: 28px;
+  }
+
+  .card-accent-left {
+    border-left: 3px solid var(--purple-light);
+  }
+
+  .highlight-box {
+    background: rgba(124,58,237,.12);
+    border: 1px solid rgba(124,58,237,.3);
+    border-radius: 12px;
+    padding: 20px 28px;
+  }
+
+  /* ── Tag row ── */
+  .tag-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .tag {
+    font-size: 12px;
+    padding: 5px 14px;
+    border-radius: 6px;
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.12);
+    color: #e2e8f0;
+  }
+
+  /* ── BIG number ── */
+  .big-num { font-size: clamp(3rem, 8vw, 6rem); font-weight: 900; color: var(--purple-light); line-height: 1; }
+
+  /* ── Quote ── */
+  .quote {
+    border-left: 3px solid var(--purple-light);
+    padding-left: 24px;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: #e2e8f0;
+    line-height: 1.6;
+  }
+
+  /* ── Design token preview ── */
+  .swatch-row { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+  .swatch {
+    width: 48px; height: 48px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+
+  /* ── Code-ish block ── */
+  .code-pill {
+    font-family: monospace;
+    font-size: .8rem;
+    background: rgba(0,0,0,.4);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 6px;
+    padding: 3px 10px;
+    color: #a78bfa;
+  }
+
+  /* ── Slide-specific backgrounds ── */
+  .bg-gradient-hero {
+    background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(124,58,237,.35) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 50% at 20% 80%, rgba(13,148,136,.2) 0%, transparent 60%),
+                #0a0a0f;
+  }
+
+  .bg-dark { background: #07070d; }
+  .bg-slate { background: #0d1117; }
+  .bg-purple-tint { background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(124,58,237,.18) 0%, #07070d 70%); }
+  .bg-teal-tint   { background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(13,148,136,.18) 0%, #07070d 70%); }
+  .bg-amber-tint  { background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(217,119,6,.18)  0%, #07070d 70%); }
+
+  /* ── Member avatar circles ── */
+  .avatar { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+  .avatar-purple { background: rgba(124,58,237,.3); border: 2px solid var(--purple-light); }
+  .avatar-teal   { background: rgba(13,148,136,.3);  border: 2px solid #2dd4bf; }
+  .avatar-amber  { background: rgba(217,119,6,.3);   border: 2px solid #fbbf24; }
+  .avatar-rose   { background: rgba(225,29,72,.3);   border: 2px solid #fb7185; }
+  .avatar-blue   { background: rgba(37,99,235,.3);   border: 2px solid #60a5fa; }
+  .avatar-green  { background: rgba(22,163,74,.3);   border: 2px solid #4ade80; }
+
+  .member-row { display: flex; align-items: center; gap: 16px; }
+  .member-info h4 { font-size: 1rem; font-weight: 600; }
+  .member-info p  { font-size: .82rem; color: var(--muted); margin-top: 2px; }
+
+  /* ── Step list ── */
+  .step-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+  .step-list li { display: flex; align-items: flex-start; gap: 14px; }
+  .step-num {
+    min-width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(124,58,237,.25);
+    border: 1px solid rgba(124,58,237,.5);
+    display: flex; align-items: center; justify-content: center;
+    font-size: .8rem; font-weight: 700; color: var(--purple-light);
+    flex-shrink: 0;
+  }
+  .step-text { font-size: .95rem; color: #cbd5e1; line-height: 1.6; padding-top: 4px; }
+
+  /* ── Screenshot mock ── */
+  .browser-mock {
+    background: #111;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .browser-bar {
+    background: #1a1a2e;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #ff5f57; }
+  .dot-y { background: #febc2e; }
+  .dot-g { background: #28c840; }
+  .browser-url { flex: 1; background: rgba(255,255,255,.07); border-radius: 6px; padding: 4px 12px; font-size: 11px; color: var(--muted); margin-left: 8px; }
+  .browser-body { padding: 24px; min-height: 120px; }
+
+  /* ── Inspiration pull-quote ── */
+  .inspo-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; }
+  .inspo-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; padding: 20px; }
+  .inspo-card h4 { font-size: .85rem; font-weight: 600; margin-bottom: 8px; }
+  .inspo-card p  { font-size: .82rem; color: var(--muted); line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<div class="deck" id="deck">
+
+  <!-- ═══════════════════════════ SLIDE 1 — TITLE ═══════════════════════════ -->
+  <div class="slide bg-gradient-hero active" id="s0">
+    <div style="text-align:center;max-width:800px;">
+      <div class="label" style="margin-bottom:16px">CS 311 · Web Programming · Project 1</div>
+      <h1 class="hero-title">
+        One Team.<br>
+        <span class="accent">Six Voices.</span>
+      </h1>
+      <p class="body-text mt-6" style="max-width:520px;margin-left:auto;margin-right:auto">
+        A collaborative portfolio project where every member brings something
+        unique — and together we built something greater.
+      </p>
+      <div class="mt-6" style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">
+        <span class="chip chip-purple">6 Members</span>
+        <span class="chip chip-teal">Multi-Page Portfolios</span>
+        <span class="chip chip-amber">Team Hub</span>
+        <span class="chip chip-slate">Pure Frontend</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ SLIDE 2 — THE IDEA ═══════════════════════ -->
+  <div class="slide bg-dark" id="s1">
+    <div class="col-2" style="align-items:center">
+      <div>
+        <div class="chip chip-purple">The Concept</div>
+        <h2 class="section-title">Not one portfolio.<br><span class="accent">Six of them.</span></h2>
+        <p class="body-text mt-6">
+          The brief was simple: build a personal portfolio. But we asked — what if each member built 
+          their own, fully independent site, while a central <strong>Team Hub</strong> connected 
+          all six together?
+        </p>
+        <p class="body-text mt-4">
+          Every portfolio is a reflection of that person. Different stacks, different aesthetics, 
+          different stories — unified by one landing page.
+        </p>
+      </div>
+      <div>
+        <div class="browser-mock">
+          <div class="browser-bar">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            <span class="browser-url">team-portfolio / index.html</span>
+          </div>
+          <div class="browser-body">
+            <p style="color:var(--muted);font-size:.82rem;margin-bottom:12px">Team Hub Landing Page</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+              <div style="background:rgba(124,58,237,.2);border-radius:8px;padding:12px;font-size:.75rem;text-align:center">🧑‍💻<br>Ritvik</div>
+              <div style="background:rgba(13,148,136,.2);border-radius:8px;padding:12px;font-size:.75rem;text-align:center">👨‍💻<br>Vasu</div>
+              <div style="background:rgba(217,119,6,.2);border-radius:8px;padding:12px;font-size:.75rem;text-align:center">👩‍🎨<br>Mohhet</div>
+              <div style="background:rgba(225,29,72,.2);border-radius:8px;padding:12px;font-size:.75rem;text-align:center">🎯<br>Mohith</div>
+              <div style="background:rgba(37,99,235,.2);border-radius:8px;padding:12px;font-size:.75rem;text-align:center">⚡<br>Bharath</div>
+              <div style="background:rgba(22,163,74,.2);border-radius:8px;padding:12px;font-size:.75rem;text-align:center">🌟<br>Vikas</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ SLIDE 3 — TEAM ═══════════════════════════ -->
+  <div class="slide bg-purple-tint" id="s2">
+    <div class="w-full" style="max-width:860px">
+      <div class="chip chip-purple">The Team</div>
+      <h2 class="section-title mb-4" style="margin-bottom:24px">Six people. <span class="accent">Six perspectives.</span></h2>
+      <div class="col-2" style="gap:16px">
+        <div class="card member-row">
+          <div class="avatar avatar-purple">🧑‍💻</div>
+          <div class="member-info">
+            <h4>Ritvik Reddy</h4>
+            <p>AI/ML · Dark gradient theme · Multi-page</p>
+          </div>
+        </div>
+        <div class="card member-row">
+          <div class="avatar avatar-teal">👨‍💻</div>
+          <div class="member-info">
+            <h4>Vasu Kiran Naladala</h4>
+            <p>Dark navy · Glass-card design · JS-animated</p>
+          </div>
+        </div>
+        <div class="card member-row">
+          <div class="avatar avatar-amber">👩‍🎨</div>
+          <div class="member-info">
+            <h4>Balaka Mohhet Naidu</h4>
+            <p>Warm editorial · Bold borders · Offset shadows</p>
+          </div>
+        </div>
+        <div class="card member-row">
+          <div class="avatar avatar-rose">🎯</div>
+          <div class="member-info">
+            <h4>Mohith Gannamani</h4>
+            <p>Single-page · Font Awesome icons · Clean layout</p>
+          </div>
+        </div>
+        <div class="card member-row">
+          <div class="avatar avatar-blue">⚡</div>
+          <div class="member-info">
+            <h4>Bharath Vedulla</h4>
+            <p>Bootstrap dark · Multi-page · Skills showcase</p>
+          </div>
+        </div>
+        <div class="card member-row">
+          <div class="avatar avatar-green">🌟</div>
+          <div class="member-info">
+            <h4>Vikas</h4>
+            <p>Tailwind CSS · Dual dark/light theme toggle</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ SLIDE 4 — STRUCTURE ═══════════════════════ -->
+  <div class="slide bg-dark" id="s3">
+    <div class="col-2" style="align-items:start;max-width:960px">
+      <div>
+        <div class="chip chip-teal">Architecture</div>
+        <h2 class="section-title">How it's<br><span class="accent-teal">structured</span></h2>
+        <p class="body-text mt-6">
+          A single repo. Each member owns their own folder — completely independent. 
+          The root <span class="code-pill">index.html</span> is the Team Hub that links everyone together.
+        </p>
+        <div class="tag-row mt-4">
+          <span class="tag">HTML5</span>
+          <span class="tag">CSS3</span>
+          <span class="tag">Bootstrap 5</span>
+          <span class="tag">Tailwind CSS</span>
+          <span class="tag">Vanilla JS</span>
+          <span class="tag">Nodemailer</span>
+        </div>
+      </div>
+      <div style="font-family:monospace;font-size:.82rem;line-height:2;color:#94a3b8;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:24px">
+        <span style="color:#7c3aed">portfolio-project/</span><br>
+        ├── <span style="color:#2dd4bf">index.html</span>  <span style="opacity:.5"># Team Hub</span><br>
+        ├── css/<br>
+        ├── <span style="color:#a78bfa">ritvik/</span>  <span style="opacity:.5"># 5 pages + backend</span><br>
+        │ &nbsp;&nbsp;├── index.html<br>
+        │ &nbsp;&nbsp;├── about.html<br>
+        │ &nbsp;&nbsp;├── projects.html<br>
+        │ &nbsp;&nbsp;├── skills.html<br>
+        │ &nbsp;&nbsp;└── contact.html<br>
+        ├── <span style="color:#2dd4bf">vasu/</span><br>
+        ├── <span style="color:#fbbf24">mohhet/</span><br>
+        ├── <span style="color:#fb7185">mohith/</span><br>
+        ├── <span style="color:#60a5fa">bharath/</span><br>
+        └── <span style="color:#4ade80">vikas/</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ SLIDE 5 — DESIGN LANGUAGE ════════════════ -->
+  <div class="slide bg-slate" id="s4">
+    <div class="w-full" style="max-width:900px">
+      <div class="chip chip-amber">Design Philosophy</div>
+      <h2 class="section-title" style="margin-bottom:8px">Every site tells a <span class="accent-amber">different story</span></h2>
+      <p class="body-text" style="margin-bottom:28px">We each chose our own visual language — and cross-pollinated ideas.</p>
+      <div class="inspo-row">
+        <div class="inspo-card">
+          <h4 style="color:#a78bfa">🌑 Dark gradient aesthetic</h4>
+          <p>Ritvik and Vasu both run deep dark themes — Ritvik's purple gradients, Vasu's navy glass-cards with blur effects. Dark backgrounds let the content pop.</p>
+          <div class="swatch-row">
+            <div class="swatch" style="background:linear-gradient(135deg,#1a0533,#2d1b6e)">🔮</div>
+            <div class="swatch" style="background:linear-gradient(135deg,#0a192f,#112240)">🌊</div>
+          </div>
+        </div>
+        <div class="inspo-card">
+          <h4 style="color:#fbbf24">📰 Editorial warmth</h4>
+          <p>Mohhet's portfolio uses a warm, editorial style — bold 2px borders, offset box-shadows, and coloured card backgrounds. Gave us ideas for card hover states across the team.</p>
+          <div class="swatch-row">
+            <div class="swatch" style="background:#fff3cd;color:#333">📰</div>
+            <div class="swatch" style="background:#f8d7da;color:#333">🌸</div>
+          </div>
+        </div>
+        <div class="inspo-card">
+          <h4 style="color:#fb7185">🎯 Minimal single-pager</h4>
+          <p>Mohith's clean single-page approach with Font Awesome icons showed how much personality you can pack into one scrollable page without overloading the user.</p>
+        </div>
+        <div class="inspo-card">
+          <h4 style="color:#4ade80">☀️ Theme switching</h4>
+          <p>Vikas built a full dark/light toggle using Tailwind CSS — a neat touch that influenced how we thought about accessibility and user preference across the project.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ SLIDE 6 — RITVIK PORTFOLIO ═══════════════ -->
+  <div class="slide bg-purple-tint" id="s5">
+    <div class="col-2" style="align-items:center;max-width:980px">
+      <div>
+        <div class="chip chip-purple">Deep Dive · Ritvik</div>
+        <h2 class="section-title"><span class="accent">Ritvik Reddy</span></h2>
+        <p class="body-text mt-4" style="margin-top:16px">B.Tech AI · CGPA 9.33 · Rank 1</p>
+        <p class="body-text mt-4" style="margin-top:12px">
+          Five-page portfolio built around a dark gradient hero + purple accent system. 
+          Internship experience at <strong>SciInv Biosciences</strong> in AI/ML.
+        </p>
+        <ul class="step-list" style="margin-top:20px">
+          <li>
+            <span class="step-num">1</span>
+            <span class="step-text"><strong>Home</strong> — cinematic hero with animated gradient, stat row (projects, GPA, rank)</span>
+          </li>
+          <li>
+            <span class="step-num">2</span>
+            <span class="step-text"><strong>Projects</strong> — NLP Resume Matcher (live app ↗), Face Recognition, Sentiment Analysis — each with pipeline steps</span>
+          </li>
+          <li>
+            <span class="step-num">3</span>
+            <span class="step-text"><strong>Contact</strong> — working backend via Express + Nodemailer, sends emails to real inbox</span>
+          </li>
+        </ul>
+        <div class="tag-row" style="margin-top:16px">
+          <span class="tag">Bootstrap 5</span>
+          <span class="tag">Custom CSS</span>
+          <span class="tag">Node.js backend</span>
+        </div>
+      </div>
+      <div>
+        <div class="browser-mock">
+          <div class="browser-bar">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            <span class="browser-url">ritvik/index.html</span>
+          </div>
+          <div class="browser-body" style="background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(13,148,136,.1))">
+            <p style="font-size:1.6rem;font-weight:800;line-height:1.1;margin-bottom:12px">AI Engineer.<br><span style="color:#a78bfa">Problem Solver.</span></p>
+            <div style="display:flex;gap:12px;margin-top:12px">
+              <div style="background:rgba(255,255,255,.08);border-radius:8px;padding:10px 14px;text-align:center;font-size:.75rem"><div style="font-size:1.1rem;font-weight:700">3+</div>Projects</div>
+              <div style="background:rgba(255,255,255,.08);border-radius:8px;padding:10px 14px;text-align:center;font-size:.75rem"><div style="font-size:1.1rem;font-weight:700">9.33</div>CGPA</div>
+              <div style="background:rgba(255,255,255,.08);border-radius:8px;padding:10px 14px;text-align:center;font-size:.75rem"><div style="font-size:1.1rem;font-weight:700">#1</div>Rank</div>
+            </div>
+          </div>
+        </div>
+        <div class="highlight-box" style="margin-top:16px">
+          <p style="font-size:.85rem;color:#a78bfa">🚀 Live feature</p>
+          <p style="font-size:.82rem;color:#cbd5e1;margin-top:4px">The NLP Resume Matcher project card links directly to the deployed app at <strong>resume-matcher-gdgj.onrender.com</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ SLIDE 7 — VASU PORTFOLIO ═════════════════ -->
+  <div class="slide bg-teal-tint" id="s6">
+    <div class="col-2" style="align-items:center;max-width:980px">
+      <div>
+        <div class="browser-mock">
+          <div class="browser-bar">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            <span class="browser-url">vasu/index.html</span>
+          </div>
+          <div class="browser-body" style="background:linear-gradient(135deg,rgba(10,25,47,.8),rgba(17,34,64,.8))">
+            <p style="font-size:1.1rem;font-weight:700;color:#2dd4bf;margin-bottom:8px">Vasu Kiran Naladala</p>
+            <div style="background:rgba(255,255,255,.05);border:1px solid rgba(45,212,191,.2);border-radius:10px;padding:14px;backdrop-filter:blur(8px)">
+              <p style="font-size:.8rem;color:#94a3b8">Glass card component</p>
+              <p style="font-size:.75rem;color:#cbd5e1;margin-top:4px">backdrop-filter: blur(12px)<br>border: 1px solid rgba(255,255,255,.1)</p>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:16px;border-color:rgba(45,212,191,.3)">
+          <p style="font-size:.82rem;color:#2dd4bf">💡 What we borrowed</p>
+          <p style="font-size:.8rem;color:#94a3b8;margin-top:6px">Vasu's glass-card backdrop blur technique influenced the Team Hub card hover effects and the nav pill design system-wide.</p>
+        </div>
+      </div>
+      <div>
+        <div class="chip chip-teal">Deep Dive · Vasu</div>
+        <h2 class="section-title"><span class="accent-teal">Vasu Kiran</span><br>Naladala</h2>
+        <p class="body-text" style="margin-top:14px">
+          Dark navy theme with glass-card components — a modern, polished aesthetic driven by 
+          <strong>backdrop-filter blur</strong> and subtle border gradients.
+        </p>
+        <ul class="step-list" style="margin-top:20px">
+          <li>
+            <span class="step-num" style="background:rgba(13,148,136,.25);border-color:rgba(13,148,136,.5);color:#2dd4bf">1</span>
+            <span class="step-text">Full multi-page site with dedicated About, Projects, Skills, Contact pages</span>
+          </li>
+          <li>
+            <span class="step-num" style="background:rgba(13,148,136,.25);border-color:rgba(13,148,136,.5);color:#2dd4bf">2</span>
+            <span class="step-text">JavaScript animations — scroll-triggered reveals, skill progress bars, typed hero text</span>
+          </li>
+          <li>
+            <span class="step-num" style="background:rgba(13,148,136,.25);border-color:rgba(13,148,136,.5);color:#2dd4bf">3</span>
+            <span class="step-text">Custom CSS-only glass morphism without any external UI library for those components</span>
+          </li>
+        </ul>
+        <div class="tag-row" style="margin-top:16px">
+          <span class="tag">Glass morphism</span>
+          <span class="tag">Scroll animations</span>
+          <span class="tag">Custom JS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ SLIDE 8 — CROSS POLLINATION ══════════════ -->
+  <div class="slide bg-dark" id="s7">
+    <div class="w-full" style="max-width:900px">
+      <div class="chip chip-rose">The Magic Ingredient</div>
+      <h2 class="section-title" style="margin-bottom:24px">Ideas that <span style="color:#fb7185">jumped portfolios</span></h2>
+      <div class="col-3">
+        <div class="card card-accent-left" style="border-color:#a78bfa">
+          <p style="font-size:1.4rem;margin-bottom:10px">🎨</p>
+          <h4 style="font-size:.9rem;font-weight:600;margin-bottom:6px">Colour-coded members</h4>
+          <p style="font-size:.8rem;color:var(--muted);line-height:1.6">Each person has their own accent colour — purple, teal, amber, rose, blue, green. Used in the Team Hub cards and carried through each individual site.</p>
+        </div>
+        <div class="card card-accent-left" style="border-color:#2dd4bf">
+          <p style="font-size:1.4rem;margin-bottom:10px">✨</p>
+          <h4 style="font-size:.9rem;font-weight:600;margin-bottom:6px">Hover lift animation</h4>
+          <p style="font-size:.8rem;color:var(--muted);line-height:1.6">Mohhet's editorial box-shadow offset cards inspired the hover lift used on Team Hub member cards — a subtle <code style="font-size:.75rem">translateY(-6px)</code> + shadow.</p>
+        </div>
+        <div class="card card-accent-left" style="border-color:#fbbf24">
+          <p style="font-size:1.4rem;margin-bottom:10px">🌙</p>
+          <h4 style="font-size:.9rem;font-weight:600;margin-bottom:6px">Dark-first philosophy</h4>
+          <p style="font-size:.8rem;color:var(--muted);line-height:1.6">Vikas's light/dark toggle and Vasu's deep navy convinced the team that dark-first wasn't just a preference — it was a design statement that made content stand out.</p>
+        </div>
+        <div class="card card-accent-left" style="border-color:#fb7185">
+          <p style="font-size:1.4rem;margin-bottom:10px">📌</p>
+          <h4 style="font-size:.9rem;font-weight:600;margin-bottom:6px">← Team Hub nav link</h4>
+          <p style="font-size:.8rem;color:var(--muted);line-height:1.6">Every single portfolio page — all 21 HTML files — has a persistent "← Team Hub" link in the navbar. Click anywhere, always find your way back.</p>
+        </div>
+        <div class="card card-accent-left" style="border-color:#60a5fa">
+          <p style="font-size:1.4rem;margin-bottom:10px">📱</p>
+          <h4 style="font-size:.9rem;font-weight:600;margin-bottom:6px">Mobile responsive</h4>
+          <p style="font-size:.8rem;color:var(--muted);line-height:1.6">Bootstrap 5 grid + CSS clamp() for fluid type ensures every portfolio works from 320px mobile to 2K desktop — zero extra media query bloat.</p>
+        </div>
+        <div class="card card-accent-left" style="border-color:#4ade80">
+          <p style="font-size:1.4rem;margin-bottom:10px">🚀</p>
+          <h4 style="font-size:.9rem;font-weight:600;margin-bottom:6px">Live features</h4>
+          <p style="font-size:.8rem;color:var(--muted);line-height:1.6">Not just static pages — Ritvik's portfolio has a working contact backend (Express + Nodemailer) and a deployed NLP app link. Real, functional.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ SLIDE 9 — LANDING PAGE ═══════════════════ -->
+  <div class="slide bg-purple-tint" id="s8">
+    <div class="col-2" style="align-items:center;max-width:960px">
+      <div>
+        <div class="chip chip-purple">The Glue</div>
+        <h2 class="section-title">The <span class="accent">Team Hub</span></h2>
+        <p class="body-text mt-6" style="margin-top:16px">
+          The landing page isn't just a links page. It's a statement. Dark gradient full-viewport 
+          hero, 6 colour-coded member cards, smooth hover animations, and a scrolling navbar.
+        </p>
+        <ul class="step-list" style="margin-top:20px">
+          <li>
+            <span class="step-num">→</span>
+            <span class="step-text">Full-screen hero with radial gradient and animated scroll cue</span>
+          </li>
+          <li>
+            <span class="step-num">→</span>
+            <span class="step-text">6 cards, each a distinct colour — click to enter that member's world</span>
+          </li>
+          <li>
+            <span class="step-num">→</span>
+            <span class="step-text">Display order: Ritvik → Vasu → Mohhet → Mohith → Bharath → Vikas</span>
+          </li>
+          <li>
+            <span class="step-num">→</span>
+            <span class="step-text">Pure Bootstrap 5 grid + custom CSS — no frameworks beyond that</span>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <div class="browser-mock">
+          <div class="browser-bar">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            <span class="browser-url">portfolio-project/index.html</span>
+          </div>
+          <div class="browser-body" style="background:radial-gradient(ellipse 80% 60% at 60% 40%,rgba(124,58,237,.4) 0%,transparent 70%),#0a0a0f">
+            <p style="text-align:center;font-size:.7rem;color:var(--muted);margin-bottom:12px;text-transform:uppercase;letter-spacing:.1em">CS 311 · Team Portfolio</p>
+            <p style="text-align:center;font-size:1.4rem;font-weight:800;margin-bottom:16px">Meet the Team</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px">
+              <div style="background:rgba(124,58,237,.25);border:1px solid rgba(124,58,237,.4);border-radius:8px;padding:8px;text-align:center;font-size:.7rem;transition:.3s">🧑‍💻 Ritvik</div>
+              <div style="background:rgba(13,148,136,.25);border:1px solid rgba(13,148,136,.4);border-radius:8px;padding:8px;text-align:center;font-size:.7rem">👨‍💻 Vasu</div>
+              <div style="background:rgba(217,119,6,.25);border:1px solid rgba(217,119,6,.4);border-radius:8px;padding:8px;text-align:center;font-size:.7rem">👩‍🎨 Mohhet</div>
+              <div style="background:rgba(225,29,72,.25);border:1px solid rgba(225,29,72,.4);border-radius:8px;padding:8px;text-align:center;font-size:.7rem">🎯 Mohith</div>
+              <div style="background:rgba(37,99,235,.25);border:1px solid rgba(37,99,235,.4);border-radius:8px;padding:8px;text-align:center;font-size:.7rem">⚡ Bharath</div>
+              <div style="background:rgba(22,163,74,.25);border:1px solid rgba(22,163,74,.4);border-radius:8px;padding:8px;text-align:center;font-size:.7rem">🌟 Vikas</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ SLIDE 10 — WHAT WE LEARNED ═══════════════ -->
+  <div class="slide bg-amber-tint" id="s9">
+    <div class="w-full" style="max-width:860px;text-align:center">
+      <div class="chip chip-amber">Takeaways</div>
+      <h2 class="section-title" style="margin-bottom:32px">What we <span class="accent-amber">actually learned</span></h2>
+      <div class="col-3" style="text-align:left">
+        <div class="card">
+          <div class="big-num" style="font-size:3rem;color:#fbbf24">01</div>
+          <h4 style="margin:12px 0 6px;font-size:.95rem">Code reviews happen naturally</h4>
+          <p style="font-size:.8rem;color:var(--muted);line-height:1.6">When you can literally open a teammate's HTML file and read it, you start borrowing ideas and catching patterns — without any formal review process.</p>
+        </div>
+        <div class="card">
+          <div class="big-num" style="font-size:3rem;color:#fbbf24">02</div>
+          <h4 style="margin:12px 0 6px;font-size:.95rem">Design is a conversation</h4>
+          <p style="font-size:.8rem;color:var(--muted);line-height:1.6">Mohhet's editorial cards, Vikas's theme toggle, Vasu's glass morphism — none of these were planned centrally. They emerged and spread organically.</p>
+        </div>
+        <div class="card">
+          <div class="big-num" style="font-size:3rem;color:#fbbf24">03</div>
+          <h4 style="margin:12px 0 6px;font-size:.95rem">Pure frontend is enough</h4>
+          <p style="font-size:.8rem;color:var(--muted);line-height:1.6">No build tools. No frameworks beyond Bootstrap and Tailwind. Just HTML, CSS, and vanilla JS. And we shipped 21 pages, a working backend, and a live deployed app.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ SLIDE 11 — THANK YOU ═════════════════════ -->
+  <div class="slide bg-gradient-hero" id="s10">
+    <div style="text-align:center;max-width:700px">
+      <div style="font-size:3rem;margin-bottom:20px">🚀</div>
+      <h1 class="hero-title">Thanks for<br><span class="accent">watching.</span></h1>
+      <p class="body-text mt-6" style="margin-top:20px;max-width:480px;margin-left:auto;margin-right:auto">
+        Six people. Eleven weeks. Twenty-one HTML files. One team.
+      </p>
+      <div class="highlight-box" style="margin-top:32px;text-align:left">
+        <p style="font-size:.82rem;color:#94a3b8;margin-bottom:8px;text-transform:uppercase;letter-spacing:.1em">Quick links</p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:8px">
+          <span class="chip chip-purple">Team Hub · index.html</span>
+          <span class="chip chip-teal">Ritvik's Portfolio</span>
+          <span class="chip chip-amber">Vasu's Portfolio</span>
+          <span class="chip chip-rose">NLP Resume Matcher ↗</span>
+        </div>
+      </div>
+      <p style="font-size:.8rem;color:var(--muted);margin-top:28px">CS 311 · Web Programming · Mahindra University · 2026</p>
+    </div>
+  </div>
+
+</div><!-- /deck -->
+
+<div id="nav">
+  <button onclick="go(-1)" title="Previous (←)">‹</button>
+  <span id="counter">1 / 11</span>
+  <button onclick="go(1)" title="Next (→)">›</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let cur = 0;
+
+  function go(dir) {
+    const next = cur + dir;
+    if (next < 0 || next >= total) return;
+    slides[cur].classList.remove('active');
+    slides[cur].classList.add('exit');
+    setTimeout(() => slides[cur - dir === cur ? cur : cur].classList.remove('exit'), 400);
+    slides[cur].addEventListener('transitionend', function cleanup() {
+      slides[cur].classList.remove('exit');
+      slides[cur].removeEventListener('transitionend', cleanup);
+    }, { once: true });
+    cur = next;
+    slides[cur].classList.add('active');
+    document.getElementById('counter').textContent = `${cur + 1} / ${total}`;
+    document.getElementById('progress').style.width = `${((cur + 1) / total) * 100}%`;
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') go(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')                     go(-1);
+  });
+
+  // Touch swipe
+  let tx = 0;
+  document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
+  document.addEventListener('touchend',   e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
+  });
+
+  // Init progress
+  document.getElementById('progress').style.width = `${(1 / total) * 100}%`;
+</script>
+</body>
+</html>

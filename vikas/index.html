@@ -1,0 +1,1585 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIKAS // SYS.ENG — AI &amp; Backend Systems Engineer</title>
+
+  <!-- Google Fonts: Space Grotesk (Headings), Inter (Body), JetBrains Mono (Technical Labels & Specs) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind Design System Tokens: Obsidian Dark & Drafting Paper Light -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Space Grotesk', 'system-ui', 'sans-serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            obsidian: {
+              bg: '#0B0B0D',
+              surface: '#121216',
+              border: '#232329',
+              text: '#F4F2EC',
+              muted: '#9A9AA6',
+              accent: '#FF5A1F',
+            },
+            paper: {
+              bg: '#F4F2EC',
+              surface: '#EAE7DF',
+              border: '#CFCBC0',
+              text: '#111114',
+              muted: '#5A5A64',
+              accent: '#E04810',
+            },
+            status: '#10B981',
+          },
+          keyframes: {
+            pulseFlow: {
+              '0%, 100%': { opacity: '0.35' },
+              '50%': { opacity: '1' },
+            },
+          },
+          animation: {
+            pulseFlow: 'pulseFlow 1.8s ease-in-out infinite',
+          },
+        },
+      },
+    };
+  </script>
+</head>
+
+<body class="font-sans antialiased bg-paper-bg text-paper-text dark:bg-obsidian-bg dark:text-obsidian-text selection:bg-paper-accent dark:selection:bg-obsidian-accent selection:text-white transition-colors duration-200 overflow-x-hidden">
+
+  <!-- Architectural Blueprint Grid Background Layer -->
+  <div
+    aria-hidden="true"
+    class="fixed inset-0 -z-10 pointer-events-none opacity-60 dark:opacity-40 bg-[linear-gradient(to_right,#CFCBC0_1px,transparent_1px),linear-gradient(to_bottom,#CFCBC0_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#1B1B22_1px,transparent_1px),linear-gradient(to_bottom,#1B1B22_1px,transparent_1px)] [background-size:36px_36px]"
+  ></div>
+
+  <!-- =========================================================================
+       1. STICKY TOP NAVIGATION BAR
+  ========================================================================== -->
+  <header class="sticky top-0 z-40 w-full bg-paper-bg/95 dark:bg-obsidian-bg/95 backdrop-blur-md border-b border-paper-border dark:border-obsidian-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 gap-3">
+
+        <!-- Left: Brand Mark -->
+        <a
+          href="#top"
+          class="flex items-center gap-2.5 font-mono text-xs sm:text-sm font-bold tracking-tight text-paper-text dark:text-obsidian-text hover:text-paper-accent dark:hover:text-obsidian-accent transition-colors shrink-0"
+        >
+          <span class="relative flex h-2.5 w-2.5" aria-hidden="true">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-status opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-status"></span>
+          </span>
+          <span>VIKAS <span class="text-paper-accent dark:text-obsidian-accent">//</span> SYS.ENG</span>
+        </a>
+
+        <!-- Center: Indexed Desktop Nav Links -->
+        <nav class="hidden md:flex items-center gap-1 font-mono text-xs" aria-label="Primary Navigation">
+          <a href="#about" class="px-3 py-2 rounded-md text-paper-muted dark:text-obsidian-muted hover:text-paper-text dark:hover:text-obsidian-text hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+            <span class="text-paper-accent dark:text-obsidian-accent mr-1">01.</span>About
+          </a>
+          <a href="#systems" class="px-3 py-2 rounded-md text-paper-muted dark:text-obsidian-muted hover:text-paper-text dark:hover:text-obsidian-text hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+            <span class="text-paper-accent dark:text-obsidian-accent mr-1">02.</span>Systems
+          </a>
+          <a href="#milestones" class="px-3 py-2 rounded-md text-paper-muted dark:text-obsidian-muted hover:text-paper-text dark:hover:text-obsidian-text hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+            <span class="text-paper-accent dark:text-obsidian-accent mr-1">03.</span>Milestones
+          </a>
+          <a href="#contact" class="px-3 py-2 rounded-md text-paper-muted dark:text-obsidian-muted hover:text-paper-text dark:hover:text-obsidian-text hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+            <span class="text-paper-accent dark:text-obsidian-accent mr-1">04.</span>Contact
+          </a>
+          <a href="../index.html" class="px-3 py-2 rounded-md text-paper-muted dark:text-obsidian-muted hover:text-paper-text dark:hover:text-obsidian-text hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+            &#8592; Team Hub
+          </a>
+        </nav>
+
+        <!-- Right: Theme Toggle, Command Palette Trigger, Mobile Menu -->
+        <div class="flex items-center gap-2">
+          <!-- Theme Toggle (Obsidian Dark / Drafting Paper) -->
+          <button
+            id="themeToggleBtn"
+            type="button"
+            aria-label="Toggle Obsidian Dark and Drafting Paper Theme"
+            class="inline-flex items-center gap-1.5 px-3 py-2 rounded-md border border-paper-border dark:border-obsidian-border bg-paper-surface dark:bg-obsidian-surface font-mono text-[11px] font-semibold uppercase tracking-wider hover:border-paper-accent dark:hover:border-obsidian-accent transition-colors cursor-pointer"
+          >
+            <span class="w-2 h-2 rounded-full bg-paper-accent dark:bg-obsidian-accent"></span>
+            <span id="themeDarkLabel">DARK</span>
+            <span class="text-paper-muted dark:text-obsidian-muted">/</span>
+            <span id="themePaperLabel" class="text-paper-muted dark:text-obsidian-muted">PAPER</span>
+          </button>
+
+          <!-- Command Palette Button -->
+          <button
+            id="cmdPaletteBtn"
+            type="button"
+            aria-label="Open Command Palette"
+            class="inline-flex items-center gap-1.5 px-3 py-2 rounded-md border border-paper-border dark:border-obsidian-border bg-paper-surface dark:bg-obsidian-surface font-mono text-[11px] font-semibold text-paper-text dark:text-obsidian-text hover:border-paper-accent dark:hover:border-obsidian-accent transition-colors cursor-pointer"
+          >
+            <span class="hidden sm:inline text-paper-muted dark:text-obsidian-muted">CMD</span>
+            <kbd class="px-1.5 py-0.5 rounded bg-black/10 dark:bg-white/10 text-[10px]">⌘K</kbd>
+          </button>
+
+          <!-- Mobile Hamburger -->
+          <button
+            id="mobileMenuBtn"
+            type="button"
+            aria-label="Toggle Mobile Navigation"
+            aria-expanded="false"
+            class="md:hidden p-2.5 rounded-md border border-paper-border dark:border-obsidian-border bg-paper-surface dark:bg-obsidian-surface hover:border-paper-accent dark:hover:border-obsidian-accent transition-colors cursor-pointer"
+          >
+            <svg id="mobileIconOpen" class="w-4 h-4 block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg id="mobileIconClose" class="w-4 h-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileMenu" class="hidden md:hidden border-t border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg">
+      <nav class="px-4 py-3 grid grid-cols-2 gap-2 font-mono text-xs" aria-label="Mobile Navigation">
+        <a href="#about" class="mobile-nav-link px-3 py-3 rounded-md border border-paper-border dark:border-obsidian-border hover:border-paper-accent dark:hover:border-obsidian-accent">
+          <span class="text-paper-accent dark:text-obsidian-accent mr-1">01.</span>About
+        </a>
+        <a href="#systems" class="mobile-nav-link px-3 py-3 rounded-md border border-paper-border dark:border-obsidian-border hover:border-paper-accent dark:hover:border-obsidian-accent">
+          <span class="text-paper-accent dark:text-obsidian-accent mr-1">02.</span>Systems
+        </a>
+        <a href="#milestones" class="mobile-nav-link px-3 py-3 rounded-md border border-paper-border dark:border-obsidian-border hover:border-paper-accent dark:hover:border-obsidian-accent">
+          <span class="text-paper-accent dark:text-obsidian-accent mr-1">03.</span>Milestones
+        </a>
+        <a href="#contact" class="mobile-nav-link px-3 py-3 rounded-md border border-paper-border dark:border-obsidian-border hover:border-paper-accent dark:hover:border-obsidian-accent">
+          <span class="text-paper-accent dark:text-obsidian-accent mr-1">04.</span>Contact
+          </a>
+          <a href="../index.html" class="px-3 py-2 rounded-md text-paper-muted dark:text-obsidian-muted hover:text-paper-text dark:hover:text-obsidian-text hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+            &#8592; Team Hub
+          </a>
+        </nav>
+    </div>
+  </header>
+
+  <main id="top" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- =======================================================================
+         2. HERO SECTION (2-Column Blueprint Layout)
+    ======================================================================== -->
+    <section class="pt-10 pb-16 sm:pt-14 sm:pb-20 border-b border-paper-border dark:border-obsidian-border">
+      <!-- Top Spec Strip -->
+      <div class="flex flex-wrap items-center justify-between gap-2 pb-5 mb-8 border-b border-paper-border dark:border-obsidian-border font-mono text-[11px] uppercase tracking-widest text-paper-muted dark:text-obsidian-muted">
+        <span><span class="text-paper-accent dark:text-obsidian-accent font-semibold">00 //</span> SYSTEM SPECIFICATION SHEET</span>
+        <span>HYDERABAD, IN · REV 2026</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+
+        <!-- Left Column (7 cols): Status, Headline, Bio, CTAs -->
+        <div class="lg:col-span-7 space-y-6">
+          <!-- Status Indicator -->
+          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-md border border-paper-border dark:border-obsidian-border bg-paper-surface dark:bg-obsidian-surface font-mono text-[11px] font-semibold tracking-wider uppercase">
+            <span class="w-2 h-2 rounded-full bg-status"></span>
+            <span>AVAILABLE FOR AI &amp; BACKEND ROLES</span>
+          </div>
+
+          <!-- Bold Headline -->
+          <h1 class="font-display text-4xl sm:text-5xl lg:text-[3.4rem] font-bold tracking-tight leading-[1.08] text-paper-text dark:text-obsidian-text">
+            Vikas <span class="text-paper-accent dark:text-obsidian-accent">—</span> AI &amp; Backend Systems Engineer
+          </h1>
+
+          <!-- Concise Technical Bio -->
+          <p class="text-base sm:text-lg text-paper-muted dark:text-obsidian-muted leading-relaxed max-w-2xl">
+            Engineering scalable backend APIs, distributed Retrieval-Augmented Generation (RAG) pipelines with <span class="font-mono text-sm text-paper-text dark:text-obsidian-text">FastAPI</span> and <span class="font-mono text-sm text-paper-text dark:text-obsidian-text">pgvector</span>, and low-level runtime systems designed for deterministic performance and reliability.
+          </p>
+
+          <!-- Primary CTA Buttons -->
+          <div class="flex flex-wrap items-center gap-3 pt-1">
+            <a
+              href="#systems"
+              class="inline-flex items-center gap-2.5 px-5 py-3 rounded-md bg-paper-accent dark:bg-obsidian-accent hover:opacity-90 text-white font-mono text-xs sm:text-sm font-semibold uppercase tracking-wider transition-opacity"
+            >
+              Inspect Systems
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+
+            <a
+              href="https://github.com/Vikas-hub-web"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2.5 px-5 py-3 rounded-md border border-paper-border dark:border-obsidian-border bg-paper-surface dark:bg-obsidian-surface hover:border-paper-accent dark:hover:border-obsidian-accent text-paper-text dark:text-obsidian-text font-mono text-xs sm:text-sm font-semibold transition-colors"
+            >
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+              </svg>
+              GitHub
+            </a>
+          </div>
+
+          <!-- High-Signal Key Telemetry Boxes -->
+          <div class="grid grid-cols-3 gap-3 pt-3">
+            <div class="p-3.5 rounded-md border border-paper-border dark:border-obsidian-border bg-paper-surface/80 dark:bg-obsidian-surface/80">
+              <p class="font-mono text-[10px] uppercase tracking-wider text-paper-muted dark:text-obsidian-muted">Flagship Systems</p>
+              <p class="font-display text-xl sm:text-2xl font-bold mt-1">03 <span class="font-mono text-xs text-paper-accent dark:text-obsidian-accent">CORE</span></p>
+            </div>
+            <div class="p-3.5 rounded-md border border-paper-border dark:border-obsidian-border bg-paper-surface/80 dark:bg-obsidian-surface/80">
+              <p class="font-mono text-[10px] uppercase tracking-wider text-paper-muted dark:text-obsidian-muted">Architecture</p>
+              <p class="font-display text-xl sm:text-2xl font-bold mt-1">RAG <span class="font-mono text-xs text-status">&amp; API</span></p>
+            </div>
+            <div class="p-3.5 rounded-md border border-paper-border dark:border-obsidian-border bg-paper-surface/80 dark:bg-obsidian-surface/80">
+              <p class="font-mono text-[10px] uppercase tracking-wider text-paper-muted dark:text-obsidian-muted">B.Tech AI</p>
+              <p class="font-display text-xl sm:text-2xl font-bold mt-1">YR-03 <span class="font-mono text-xs text-paper-muted dark:text-obsidian-muted">MU</span></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column (5 cols): Interactive System Spec Card -->
+        <div class="lg:col-span-5">
+          <div class="rounded-lg border border-paper-border dark:border-obsidian-border bg-paper-surface dark:bg-obsidian-surface overflow-hidden">
+            <!-- Spec Card Header & Tabs -->
+            <div class="flex items-center justify-between px-4 py-3 border-b border-paper-border dark:border-obsidian-border bg-black/[0.03] dark:bg-white/[0.02]">
+              <div class="flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-wider">
+                <span class="w-2 h-2 rounded-sm bg-paper-accent dark:bg-obsidian-accent"></span>
+                <span>SPEC.CARD</span>
+              </div>
+
+              <div class="flex items-center gap-1 font-mono text-[11px]" role="tablist" aria-label="System Spec Card Tabs">
+                <button
+                  type="button"
+                  data-spec-tab="sysinfo"
+                  role="tab"
+                  aria-selected="true"
+                  class="spec-tab-btn px-2.5 py-1.5 rounded bg-paper-accent dark:bg-obsidian-accent text-white font-semibold transition-colors cursor-pointer"
+                >
+                  SYS.INFO
+                </button>
+                <button
+                  type="button"
+                  data-spec-tab="ragflow"
+                  role="tab"
+                  aria-selected="false"
+                  class="spec-tab-btn px-2.5 py-1.5 rounded text-paper-muted dark:text-obsidian-muted hover:text-paper-text dark:hover:text-obsidian-text transition-colors cursor-pointer"
+                >
+                  RAG.FLOW
+                </button>
+              </div>
+            </div>
+
+            <!-- TAB 1: SYS.INFO -->
+            <div id="spec-panel-sysinfo" class="p-4 sm:p-5 space-y-4">
+              <dl class="divide-y divide-paper-border dark:divide-obsidian-border font-mono text-xs">
+                <div class="py-2.5 flex justify-between gap-4">
+                  <dt class="text-paper-muted dark:text-obsidian-muted uppercase">Role</dt>
+                  <dd class="text-right font-medium">AI &amp; Backend Engineer</dd>
+                </div>
+                <div class="py-2.5 flex justify-between gap-4">
+                  <dt class="text-paper-muted dark:text-obsidian-muted uppercase">Education</dt>
+                  <dd class="text-right font-medium">B.Tech AI @ Mahindra University</dd>
+                </div>
+                <div class="py-2.5 flex justify-between gap-4">
+                  <dt class="text-paper-muted dark:text-obsidian-muted uppercase">Stack</dt>
+                  <dd class="text-right font-medium">FastAPI / PostgreSQL / Redis / Node.js</dd>
+                </div>
+                <div class="py-2.5 flex justify-between gap-4">
+                  <dt class="text-paper-muted dark:text-obsidian-muted uppercase">GitHub</dt>
+                  <dd class="text-right font-medium text-paper-accent dark:text-obsidian-accent">Vikas-hub-web</dd>
+                </div>
+                <div class="py-2.5 flex justify-between gap-4">
+                  <dt class="text-paper-muted dark:text-obsidian-muted uppercase">Email</dt>
+                  <dd class="text-right font-medium">vikas.dev@example.com</dd>
+                </div>
+              </dl>
+
+              <!-- One-Click Copy Controls -->
+              <div class="pt-1 grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  data-copy="vikas.dev@example.com"
+                  data-copy-label="Email copied: vikas.dev@example.com"
+                  class="copy-trigger inline-flex items-center justify-center gap-2 px-3 py-2.5 rounded-md border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg hover:border-paper-accent dark:hover:border-obsidian-accent font-mono text-[11px] font-semibold transition-colors cursor-pointer"
+                >
+                  <span>COPY EMAIL</span>
+                  <span class="text-paper-accent dark:text-obsidian-accent">⎘</span>
+                </button>
+                <button
+                  type="button"
+                  data-copy="https://github.com/Vikas-hub-web"
+                  data-copy-label="GitHub URL copied to clipboard"
+                  class="copy-trigger inline-flex items-center justify-center gap-2 px-3 py-2.5 rounded-md border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg hover:border-paper-accent dark:hover:border-obsidian-accent font-mono text-[11px] font-semibold transition-colors cursor-pointer"
+                >
+                  <span>COPY GITHUB</span>
+                  <span class="text-paper-accent dark:text-obsidian-accent">⎘</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- TAB 2: RAG.FLOW (Interactive 5-Stage Retrieval Pipeline) -->
+            <div id="spec-panel-ragflow" class="hidden p-4 sm:p-5 space-y-3.5">
+              <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-wider text-paper-muted dark:text-obsidian-muted">
+                <span>Hover or click any stage to inspect</span>
+                <span class="text-status flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-status animate-pulse"></span>
+                  PIPELINE
+                </span>
+              </div>
+
+              <!-- 5 Interactive Pipeline Nodes -->
+              <div class="space-y-1.5 font-mono text-xs" id="ragNodesContainer">
+                <button
+                  type="button"
+                  data-stage="ingest"
+                  class="rag-node w-full flex items-center justify-between px-3 py-2 rounded-md border border-paper-accent dark:border-obsidian-accent bg-paper-accent/10 dark:bg-obsidian-accent/10 text-left transition-all cursor-pointer"
+                >
+                  <span class="font-semibold"><span class="text-paper-accent dark:text-obsidian-accent mr-2">01</span>Ingest</span>
+                  <span class="text-[10px] text-paper-muted dark:text-obsidian-muted">FastAPI + Celery</span>
+                </button>
+                <div class="flex justify-center text-paper-accent dark:text-obsidian-accent text-xs animate-pulseFlow" aria-hidden="true">↓</div>
+
+                <button
+                  type="button"
+                  data-stage="chunk"
+                  class="rag-node w-full flex items-center justify-between px-3 py-2 rounded-md border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg hover:border-paper-accent dark:hover:border-obsidian-accent text-left transition-all cursor-pointer"
+                >
+                  <span class="font-semibold"><span class="text-paper-accent dark:text-obsidian-accent mr-2">02</span>Chunk &amp; Embed</span>
+                  <span class="text-[10px] text-paper-muted dark:text-obsidian-muted">Redis Worker Queue</span>
+                </button>
+                <div class="flex justify-center text-paper-accent dark:text-obsidian-accent text-xs animate-pulseFlow" aria-hidden="true">↓</div>
+
+                <button
+                  type="button"
+                  data-stage="pgvector"
+                  class="rag-node w-full flex items-center justify-between px-3 py-2 rounded-md border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg hover:border-paper-accent dark:hover:border-obsidian-accent text-left transition-all cursor-pointer"
+                >
+                  <span class="font-semibold"><span class="text-paper-accent dark:text-obsidian-accent mr-2">03</span>pgvector Index</span>
+                  <span class="text-[10px] text-paper-muted dark:text-obsidian-muted">PostgreSQL HNSW</span>
+                </button>
+                <div class="flex justify-center text-paper-accent dark:text-obsidian-accent text-xs animate-pulseFlow" aria-hidden="true">↓</div>
+
+                <button
+                  type="button"
+                  data-stage="rbac"
+                  class="rag-node w-full flex items-center justify-between px-3 py-2 rounded-md border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg hover:border-paper-accent dark:hover:border-obsidian-accent text-left transition-all cursor-pointer"
+                >
+                  <span class="font-semibold"><span class="text-paper-accent dark:text-obsidian-accent mr-2">04</span>RBAC Filter</span>
+                  <span class="text-[10px] text-paper-muted dark:text-obsidian-muted">Tenant Scope Gate</span>
+                </button>
+                <div class="flex justify-center text-paper-accent dark:text-obsidian-accent text-xs animate-pulseFlow" aria-hidden="true">↓</div>
+
+                <button
+                  type="button"
+                  data-stage="synthesis"
+                  class="rag-node w-full flex items-center justify-between px-3 py-2 rounded-md border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg hover:border-paper-accent dark:hover:border-obsidian-accent text-left transition-all cursor-pointer"
+                >
+                  <span class="font-semibold"><span class="text-paper-accent dark:text-obsidian-accent mr-2">05</span>LLM Synthesis</span>
+                  <span class="text-[10px] text-paper-muted dark:text-obsidian-muted">Grounded Citations</span>
+                </button>
+              </div>
+
+              <!-- Technical Explanation Box -->
+              <div class="p-3 rounded-md border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg font-mono text-[11px] leading-relaxed">
+                <p id="ragStageTitle" class="text-paper-accent dark:text-obsidian-accent font-semibold uppercase mb-1">01 // DOCUMENT INGESTION</p>
+                <p id="ragStageDesc" class="text-paper-muted dark:text-obsidian-muted">
+                  Accepts multi-tenant documents via FastAPI endpoints, validates metadata schemas, and dispatches non-blocking ingestion jobs to Celery.
+                </p>
+              </div>
+            </div>
+
+            <!-- Spec Card Footer -->
+            <div class="px-4 py-2.5 border-t border-paper-border dark:border-obsidian-border bg-black/[0.03] dark:bg-white/[0.02] flex items-center justify-between font-mono text-[10px] text-paper-muted dark:text-obsidian-muted">
+              <span>STATUS: NOMINAL</span>
+              <span>PRESS <span class="text-paper-text dark:text-obsidian-text font-semibold">⌘K</span> FOR QUICK COMMANDS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         3. 01 // ABOUT, EDUCATION & TECHNICAL STACK
+    ======================================================================== -->
+    <section id="about" class="py-16 sm:py-20 border-b border-paper-border dark:border-obsidian-border reveal-block opacity-0 translate-y-4 transition-all duration-500">
+      <div class="mb-10">
+        <p class="font-mono text-xs uppercase tracking-widest text-paper-muted dark:text-obsidian-muted mb-2">
+          <span class="text-paper-accent dark:text-obsidian-accent font-semibold">01 //</span> ABOUT
+        </p>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight">
+          Education, Focus &amp; Technical Stack
+        </h2>
+      </div>
+
+      <!-- Top Row: Education & Engineering Focus Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+        <!-- Education Card (Strictly Mahindra University Only) -->
+        <div class="p-6 sm:p-7 rounded-lg border border-paper-border dark:border-obsidian-border bg-paper-surface/80 dark:bg-obsidian-surface/80 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between font-mono text-[11px] mb-4">
+              <span class="text-paper-accent dark:text-obsidian-accent font-semibold uppercase tracking-wider">EDU // CREDENTIAL</span>
+              <span class="px-2 py-0.5 rounded bg-status/15 text-status font-semibold">YEAR 3</span>
+            </div>
+            <h3 class="font-display text-2xl font-bold mb-1.5">Mahindra University</h3>
+            <p class="font-mono text-xs sm:text-sm text-paper-text dark:text-obsidian-text mb-3">
+              B.Tech in Artificial Intelligence (3rd Year Undergraduate)
+            </p>
+            <p class="text-sm text-paper-muted dark:text-obsidian-muted leading-relaxed">
+              Building a rigorous foundation across artificial intelligence, database internals, operating systems, data structures, and algorithmic problem solving.
+            </p>
+          </div>
+        </div>
+
+        <!-- Focus Card -->
+        <div class="p-6 sm:p-7 rounded-lg border border-paper-border dark:border-obsidian-border bg-paper-surface/80 dark:bg-obsidian-surface/80 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between font-mono text-[11px] mb-4">
+              <span class="text-paper-accent dark:text-obsidian-accent font-semibold uppercase tracking-wider">DOMAINS // FOCUS</span>
+              <span class="text-paper-muted dark:text-obsidian-muted uppercase">SYSTEMS-FIRST</span>
+            </div>
+            <h3 class="font-display text-2xl font-bold mb-2">Engineering Focus</h3>
+            <p class="text-sm text-paper-muted dark:text-obsidian-muted leading-relaxed">
+              Specializing in backend architecture, Retrieval-Augmented Generation (RAG) pipelines, asynchronous task queues, and core CS fundamentals—prioritizing clean API contracts, predictable concurrency, and zero-bloat runtimes.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Grid: Categorized Technical Stack (4 Quadrants) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 border border-paper-border dark:border-obsidian-border rounded-lg overflow-hidden bg-paper-surface/60 dark:bg-obsidian-surface/60">
+
+        <!-- Backend & APIs -->
+        <div class="p-6 sm:p-7 border-b md:border-r border-paper-border dark:border-obsidian-border hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors">
+          <div class="flex items-center justify-between mb-3.5 font-mono text-[11px]">
+            <span class="text-paper-accent dark:text-obsidian-accent font-semibold">STK-01</span>
+            <span class="text-paper-muted dark:text-obsidian-muted uppercase">SERVICES</span>
+          </div>
+          <h3 class="font-display text-lg font-bold mb-3.5">Backend &amp; APIs</h3>
+          <div class="flex flex-wrap gap-2 font-mono text-xs">
+            <span class="px-2.5 py-1.5 rounded border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg">FastAPI</span>
+            <span class="px-2.5 py-1.5 rounded border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg">Node.js</span>
+            <span class="px-2.5 py-1.5 rounded border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg">REST</span>
+            <span class="px-2.5 py-1.5 rounded border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg">Celery</span>
+            <span class="px-2.5 py-1.5 rounded border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg">Redis</span>
+          </div>
+        </div>
+
+        <!-- AI & Data -->
+        <div class="p-6 sm:p-7 border-b border-paper-border dark:border-obsidian-border hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors">
+          <div class="flex items-center justify-between mb-3.5 font-mono text-[11px]">
+            <span class="text-paper-accent dark:text-obsidian-accent font-semibold">STK-02</span>
+            <span class="text-paper-muted dark:text-obsidian-muted uppercase">RETRIEVAL &amp; SEARCH</span>
+          </div>
+          <h3 class="font-display text-lg font-bold mb-3.5">AI &amp; Data</h3>
+          <div class="flex flex-wrap gap-2 font-mono text-xs">
+            <span class="px-2.5 py-1.5 rounded border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg">RAG</span>
+            <span class="px-2.5 py-1.5 rounded border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg">PostgreSQL + pgvector</span>
+            <span class="px-2.5 py-1.5 rounded border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg">Python</span>
+            <span class="px-2.5 py-1.5 rounded border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg">State-Space Search</span>
+          </div>
+        </div>
+
+        <!-- Core CS & Systems -->
+        <div class="p-6 sm:p-7 border-b md:border-b-0 md:border-r border-paper-border dark:border-obsidian-border hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors">
+          <div class="flex items-center justify-between mb-3.5 font-mono text-[11px]">
+            <span class="text-paper-accent dark:text-obsidian-accent font-semibold">STK-03</span>
+            <span class="text-paper-muted dark:text-obsidian-muted uppercase">RUNTIME</span>
+          </div>
+          <h3 class="font-display text-lg font-bold mb-3.5">Core CS &amp; Systems</h3>
+          <div class="flex flex-wrap gap-2 font-mono text-xs">
+            <span class="px-2.5 py-1.5 rounded border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg">Java Concurrency</span>
+            <span class="px-2.5 py-1.5 rounded border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg">DSA</span>
+            <span class="px-2.5 py-1.5 rounded border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg">OS/Networking Primitives</span>
+            <span class="px-2.5 py-1.5 rounded border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg">OOP</span>
+          </div>
+        </div>
+
+        <!-- Tools -->
+        <div class="p-6 sm:p-7 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors">
+          <div class="flex items-center justify-between mb-3.5 font-mono text-[11px]">
+            <span class="text-paper-accent dark:text-obsidian-accent font-semibold">STK-04</span>
+            <span class="text-paper-muted dark:text-obsidian-muted uppercase">WORKFLOW</span>
+          </div>
+          <h3 class="font-display text-lg font-bold mb-3.5">Tools</h3>
+          <div class="flex flex-wrap gap-2 font-mono text-xs">
+            <span class="px-2.5 py-1.5 rounded border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg">Git</span>
+            <span class="px-2.5 py-1.5 rounded border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg">GitHub</span>
+            <span class="px-2.5 py-1.5 rounded border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg">Linux</span>
+            <span class="px-2.5 py-1.5 rounded border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg">SQL</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         4. 02 // SELECTED SYSTEMS (3 Flagship Systems + Filter Bar)
+    ======================================================================== -->
+    <section id="systems" class="py-16 sm:py-20 border-b border-paper-border dark:border-obsidian-border reveal-block opacity-0 translate-y-4 transition-all duration-500">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-widest text-paper-muted dark:text-obsidian-muted mb-2">
+            <span class="text-paper-accent dark:text-obsidian-accent font-semibold">02 //</span> SYSTEMS
+          </p>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight">
+            Flagship Architectures
+          </h2>
+        </div>
+
+        <!-- Category Filter Bar -->
+        <div id="systemFilters" class="flex flex-wrap gap-2 font-mono text-xs" role="group" aria-label="Filter projects by category">
+          <button type="button" data-filter="ALL" class="sys-filter-btn px-3.5 py-2 rounded-md bg-paper-accent dark:bg-obsidian-accent text-white font-semibold transition-colors cursor-pointer">
+            All (3)
+          </button>
+          <button type="button" data-filter="AI & Backend" class="sys-filter-btn px-3.5 py-2 rounded-md border border-paper-border dark:border-obsidian-border bg-paper-surface dark:bg-obsidian-surface text-paper-muted dark:text-obsidian-muted hover:border-paper-accent dark:hover:border-obsidian-accent transition-colors cursor-pointer">
+            AI &amp; Backend
+          </button>
+          <button type="button" data-filter="Systems" class="sys-filter-btn px-3.5 py-2 rounded-md border border-paper-border dark:border-obsidian-border bg-paper-surface dark:bg-obsidian-surface text-paper-muted dark:text-obsidian-muted hover:border-paper-accent dark:hover:border-obsidian-accent transition-colors cursor-pointer">
+            Systems
+          </button>
+          <button type="button" data-filter="Algorithms" class="sys-filter-btn px-3.5 py-2 rounded-md border border-paper-border dark:border-obsidian-border bg-paper-surface dark:bg-obsidian-surface text-paper-muted dark:text-obsidian-muted hover:border-paper-accent dark:hover:border-obsidian-accent transition-colors cursor-pointer">
+            Algorithms
+          </button>
+        </div>
+      </div>
+
+      <!-- 3 Flagship Blueprint Cards Grid (Rendered via JS) -->
+      <div id="systemsGrid" class="grid grid-cols-1 lg:grid-cols-3 gap-5"></div>
+    </section>
+
+    <!-- =======================================================================
+         5. 03 // ENGINEERING MILESTONES (4-Item Vertical Blueprint Timeline)
+    ======================================================================== -->
+    <section id="milestones" class="py-16 sm:py-20 border-b border-paper-border dark:border-obsidian-border reveal-block opacity-0 translate-y-4 transition-all duration-500">
+      <div class="mb-10">
+        <p class="font-mono text-xs uppercase tracking-widest text-paper-muted dark:text-obsidian-muted mb-2">
+          <span class="text-paper-accent dark:text-obsidian-accent font-semibold">03 //</span> MILESTONES
+        </p>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight">
+          Engineering Milestones
+        </h2>
+      </div>
+
+      <!-- Clean Vertical Blueprint Timeline -->
+      <div class="relative pl-6 sm:pl-8 border-l border-paper-border dark:border-obsidian-border space-y-6">
+
+        <!-- Milestone 1: Aug 2026 -->
+        <div class="relative p-5 sm:p-6 rounded-lg border border-paper-border dark:border-obsidian-border bg-paper-surface/75 dark:bg-obsidian-surface/75 hover:border-paper-accent dark:hover:border-obsidian-accent transition-colors">
+          <span class="absolute -left-[31px] sm:-left-[39px] top-6 w-3 h-3 rounded-sm bg-paper-accent dark:bg-obsidian-accent ring-4 ring-paper-bg dark:ring-obsidian-bg" aria-hidden="true"></span>
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+            <span class="font-mono text-xs font-bold text-paper-accent dark:text-obsidian-accent uppercase tracking-wider">Aug 2026</span>
+            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-paper-accent/15 dark:bg-obsidian-accent/15 text-paper-accent dark:text-obsidian-accent font-semibold uppercase">Round 2 Qualifier</span>
+          </div>
+          <h3 class="font-display text-xl font-bold mb-1.5">Adobe University Hackathon 2026</h3>
+          <p class="text-sm text-paper-muted dark:text-obsidian-muted leading-relaxed">
+            Advanced as a Round 2 Qualifier, engineering a data-driven solution for the Brand Visibility Case Study.
+          </p>
+        </div>
+
+        <!-- Milestone 2: May 2026 -->
+        <div class="relative p-5 sm:p-6 rounded-lg border border-paper-border dark:border-obsidian-border bg-paper-surface/75 dark:bg-obsidian-surface/75 hover:border-paper-accent dark:hover:border-obsidian-accent transition-colors">
+          <span class="absolute -left-[31px] sm:-left-[39px] top-6 w-3 h-3 rounded-sm bg-paper-border dark:bg-obsidian-border ring-4 ring-paper-bg dark:ring-obsidian-bg" aria-hidden="true"></span>
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+            <span class="font-mono text-xs font-bold text-paper-accent dark:text-obsidian-accent uppercase tracking-wider">May 2026</span>
+            <span class="font-mono text-[10px] px-2 py-0.5 rounded border border-paper-border dark:border-obsidian-border text-paper-muted dark:text-obsidian-muted font-semibold uppercase">Data &amp; ML</span>
+          </div>
+          <h3 class="font-display text-xl font-bold mb-1.5">AI Premier League</h3>
+          <p class="text-sm text-paper-muted dark:text-obsidian-muted leading-relaxed">
+            Built end-to-end Python workflows for Data Analytics and Machine Learning Prediction Modeling.
+          </p>
+        </div>
+
+        <!-- Milestone 3: Feb 2026 -->
+        <div class="relative p-5 sm:p-6 rounded-lg border border-paper-border dark:border-obsidian-border bg-paper-surface/75 dark:bg-obsidian-surface/75 hover:border-paper-accent dark:hover:border-obsidian-accent transition-colors">
+          <span class="absolute -left-[31px] sm:-left-[39px] top-6 w-3 h-3 rounded-sm bg-paper-border dark:bg-obsidian-border ring-4 ring-paper-bg dark:ring-obsidian-bg" aria-hidden="true"></span>
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+            <span class="font-mono text-xs font-bold text-paper-accent dark:text-obsidian-accent uppercase tracking-wider">Feb 2026</span>
+            <span class="font-mono text-[10px] px-2 py-0.5 rounded border border-paper-border dark:border-obsidian-border text-paper-muted dark:text-obsidian-muted font-semibold uppercase">Automation</span>
+          </div>
+          <h3 class="font-display text-xl font-bold mb-1.5">Automation Anywhere RPA Workshop</h3>
+          <p class="text-sm text-paper-muted dark:text-obsidian-muted leading-relaxed">
+            Hands-on Robotic Process Automation Engineering focused on workflow orchestration and automated task bots.
+          </p>
+        </div>
+
+        <!-- Milestone 4: 2024 -->
+        <div class="relative p-5 sm:p-6 rounded-lg border border-paper-border dark:border-obsidian-border bg-paper-surface/75 dark:bg-obsidian-surface/75 hover:border-paper-accent dark:hover:border-obsidian-accent transition-colors">
+          <span class="absolute -left-[31px] sm:-left-[39px] top-6 w-3 h-3 rounded-sm bg-status ring-4 ring-paper-bg dark:ring-obsidian-bg" aria-hidden="true"></span>
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+            <span class="font-mono text-xs font-bold text-paper-accent dark:text-obsidian-accent uppercase tracking-wider">2024</span>
+            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-status/15 text-status font-semibold uppercase">Internship</span>
+          </div>
+          <h3 class="font-display text-xl font-bold mb-1.5">EdiGlobe AI Internship</h3>
+          <p class="text-sm text-paper-muted dark:text-obsidian-muted leading-relaxed">
+            Completed Artificial Intelligence Major &amp; Minor Project Delivery with applied machine learning pipelines.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         6. 04 // CONTACT
+    ======================================================================== -->
+    <section id="contact" class="py-16 sm:py-20 reveal-block opacity-0 translate-y-4 transition-all duration-500">
+      <div class="mb-10">
+        <p class="font-mono text-xs uppercase tracking-widest text-paper-muted dark:text-obsidian-muted mb-2">
+          <span class="text-paper-accent dark:text-obsidian-accent font-semibold">04 //</span> CONTACT
+        </p>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight">
+          Direct Transmission
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- Left (5 cols): Direct Contact Channels -->
+        <div class="lg:col-span-5 space-y-4">
+          <p class="text-sm sm:text-base text-paper-muted dark:text-obsidian-muted leading-relaxed pb-1">
+            Open to AI &amp; Backend Engineering internships, systems architecture roles, and technical collaborations.
+          </p>
+
+          <!-- GitHub Link -->
+          <a
+            href="https://github.com/Vikas-hub-web"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center justify-between p-4 rounded-lg border border-paper-border dark:border-obsidian-border bg-paper-surface dark:bg-obsidian-surface hover:border-paper-accent dark:hover:border-obsidian-accent transition-colors group"
+          >
+            <div>
+              <p class="font-mono text-[10px] uppercase tracking-wider text-paper-muted dark:text-obsidian-muted">CHANNEL 01 // GITHUB</p>
+              <p class="font-mono text-sm font-semibold mt-0.5 group-hover:text-paper-accent dark:group-hover:text-obsidian-accent transition-colors">github.com/Vikas-hub-web</p>
+            </div>
+            <span class="font-mono text-sm text-paper-muted dark:text-obsidian-muted group-hover:text-paper-accent dark:group-hover:text-obsidian-accent transition-colors">↗</span>
+          </a>
+
+          <!-- Email Copy Card -->
+          <div class="flex items-center justify-between gap-3 p-4 rounded-lg border border-paper-border dark:border-obsidian-border bg-paper-surface dark:bg-obsidian-surface">
+            <div class="min-w-0">
+              <p class="font-mono text-[10px] uppercase tracking-wider text-paper-muted dark:text-obsidian-muted">CHANNEL 02 // EMAIL</p>
+              <p class="font-mono text-sm font-semibold mt-0.5 truncate">vikas.dev@example.com</p>
+            </div>
+            <button
+              id="contactCopyEmailBtn"
+              type="button"
+              data-copy="vikas.dev@example.com"
+              data-copy-label="Email copied: vikas.dev@example.com"
+              class="copy-trigger shrink-0 px-3 py-2 rounded border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg hover:border-paper-accent dark:hover:border-obsidian-accent font-mono text-[11px] font-semibold uppercase tracking-wider transition-colors cursor-pointer"
+            >
+              COPY
+            </button>
+          </div>
+        </div>
+
+        <!-- Right (7 cols): Client-Side Validated Contact Form -->
+        <div class="lg:col-span-7">
+          <form
+            id="contactForm"
+            novalidate
+            class="p-6 sm:p-8 rounded-lg border border-paper-border dark:border-obsidian-border bg-paper-surface dark:bg-obsidian-surface space-y-5"
+          >
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label for="senderName" class="block font-mono text-[11px] uppercase tracking-wider text-paper-muted dark:text-obsidian-muted mb-2">
+                  Name *
+                </label>
+                <input
+                  id="senderName"
+                  type="text"
+                  required
+                  placeholder="Alex Rivera"
+                  class="w-full px-3.5 py-2.5 rounded-md border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg text-sm focus:outline-none focus:border-paper-accent dark:focus:border-obsidian-accent transition-colors"
+                />
+                <p id="errName" class="hidden mt-1.5 font-mono text-[11px] text-paper-accent dark:text-obsidian-accent">ERR: Please enter at least 2 characters.</p>
+              </div>
+
+              <div>
+                <label for="senderEmail" class="block font-mono text-[11px] uppercase tracking-wider text-paper-muted dark:text-obsidian-muted mb-2">
+                  Email *
+                </label>
+                <input
+                  id="senderEmail"
+                  type="email"
+                  required
+                  placeholder="alex@company.com"
+                  class="w-full px-3.5 py-2.5 rounded-md border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg text-sm focus:outline-none focus:border-paper-accent dark:focus:border-obsidian-accent transition-colors"
+                />
+                <p id="errEmail" class="hidden mt-1.5 font-mono text-[11px] text-paper-accent dark:text-obsidian-accent">ERR: Please enter a valid email address.</p>
+              </div>
+            </div>
+
+            <div>
+              <label for="senderMessage" class="block font-mono text-[11px] uppercase tracking-wider text-paper-muted dark:text-obsidian-muted mb-2">
+                Message *
+              </label>
+              <textarea
+                id="senderMessage"
+                rows="4"
+                required
+                placeholder="Share role details, architecture problems, or collaboration ideas..."
+                class="w-full px-3.5 py-2.5 rounded-md border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg text-sm focus:outline-none focus:border-paper-accent dark:focus:border-obsidian-accent transition-colors resize-y"
+              ></textarea>
+              <p id="errMessage" class="hidden mt-1.5 font-mono text-[11px] text-paper-accent dark:text-obsidian-accent">ERR: Message must be at least 10 characters.</p>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-4 pt-1">
+              <span class="font-mono text-[11px] text-paper-muted dark:text-obsidian-muted">
+                READY FOR TRANSMISSION
+              </span>
+              <button
+                type="submit"
+                class="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-paper-accent dark:bg-obsidian-accent hover:opacity-90 text-white font-mono text-xs font-semibold uppercase tracking-wider transition-opacity cursor-pointer"
+              >
+                Send Message
+                <span>→</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       MINIMALIST FOOTER
+  ========================================================================== -->
+  <footer class="border-t border-paper-border dark:border-obsidian-border bg-paper-surface/60 dark:bg-obsidian-surface/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-paper-muted dark:text-obsidian-muted">
+      <div>
+        <span class="text-paper-text dark:text-obsidian-text font-semibold">VIKAS // SYS.ENG</span> · © 2026 · Mahindra University
+      </div>
+      <div class="flex items-center gap-4">
+        <button type="button" id="footerCmdBtn" class="hover:text-paper-accent dark:hover:text-obsidian-accent transition-colors cursor-pointer">
+          [⌘K COMMANDS]
+        </button>
+        <a href="#top" class="hover:text-paper-accent dark:hover:text-obsidian-accent transition-colors">
+          [↑ TOP]
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       SLIDE-OVER TECHNICAL DOSSIER DRAWER
+  ========================================================================== -->
+  <div
+    id="dossierOverlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="dossierTitle"
+    class="fixed inset-0 z-50 hidden justify-end bg-black/65 backdrop-blur-sm transition-opacity"
+  >
+    <div
+      id="dossierPanel"
+      class="relative w-full max-w-2xl h-full overflow-y-auto bg-paper-bg dark:bg-obsidian-bg border-l border-paper-border dark:border-obsidian-border shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col"
+    >
+      <!-- Drawer Header -->
+      <div class="sticky top-0 z-10 flex items-center justify-between px-6 py-4 border-b border-paper-border dark:border-obsidian-border bg-paper-bg/95 dark:bg-obsidian-bg/95 backdrop-blur-md">
+        <div class="flex items-center gap-2.5 font-mono text-xs">
+          <span id="dossierId" class="px-2 py-0.5 rounded bg-paper-accent dark:bg-obsidian-accent text-white font-semibold">SYS-01</span>
+          <span id="dossierCategory" class="text-paper-muted dark:text-obsidian-muted uppercase tracking-wider"></span>
+        </div>
+        <button
+          id="closeDossierBtn"
+          type="button"
+          aria-label="Close Technical Dossier"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-paper-border dark:border-obsidian-border font-mono text-[11px] hover:border-paper-accent dark:hover:border-obsidian-accent hover:text-paper-accent dark:hover:text-obsidian-accent transition-colors cursor-pointer"
+        >
+          <span>ESC</span>
+          <span>✕</span>
+        </button>
+      </div>
+
+      <!-- Drawer Body -->
+      <div class="p-6 sm:p-8 space-y-7 flex-1">
+        <div>
+          <h3 id="dossierTitle" class="font-display text-2xl sm:text-3xl font-bold tracking-tight mb-3"></h3>
+          <p id="dossierSummary" class="text-sm sm:text-base text-paper-muted dark:text-obsidian-muted leading-relaxed"></p>
+        </div>
+
+        <!-- Visual Block-Based Architecture Flow Diagram -->
+        <div>
+          <h4 class="font-mono text-[11px] font-semibold uppercase tracking-widest text-paper-accent dark:text-obsidian-accent mb-3">
+            // ARCHITECTURE FLOW DIAGRAM
+          </h4>
+          <div
+            id="dossierDiagram"
+            class="p-4 sm:p-5 rounded-lg border border-paper-border dark:border-obsidian-border bg-paper-surface dark:bg-obsidian-surface space-y-2.5"
+          ></div>
+        </div>
+
+        <!-- Key Engineering Decisions -->
+        <div>
+          <h4 class="font-mono text-[11px] font-semibold uppercase tracking-widest text-paper-accent dark:text-obsidian-accent mb-3">
+            // KEY ENGINEERING DECISIONS
+          </h4>
+          <ul id="dossierDecisions" class="space-y-2.5 text-sm leading-relaxed"></ul>
+        </div>
+
+        <!-- Tech Stack Tags -->
+        <div>
+          <h4 class="font-mono text-[11px] font-semibold uppercase tracking-widest text-paper-accent dark:text-obsidian-accent mb-3">
+            // TECH STACK
+          </h4>
+          <div id="dossierTags" class="flex flex-wrap gap-2 font-mono text-xs"></div>
+        </div>
+      </div>
+
+      <!-- Drawer Footer -->
+      <div class="sticky bottom-0 px-6 py-4 border-t border-paper-border dark:border-obsidian-border bg-paper-surface dark:bg-obsidian-surface flex items-center justify-between gap-3">
+        <a
+          href="https://github.com/Vikas-hub-web"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-4 py-2.5 rounded-md bg-paper-accent dark:bg-obsidian-accent hover:opacity-90 text-white font-mono text-xs font-semibold uppercase tracking-wider transition-opacity"
+        >
+          View on GitHub ↗
+        </a>
+        <button
+          id="closeDossierFooterBtn"
+          type="button"
+          class="px-4 py-2.5 rounded-md border border-paper-border dark:border-obsidian-border font-mono text-xs font-semibold uppercase hover:border-paper-accent dark:hover:border-obsidian-accent transition-colors cursor-pointer"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       7. INTERACTIVE COMMAND PALETTE MODAL (⌘K / Ctrl+K)
+  ========================================================================== -->
+  <div
+    id="cmdOverlay"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Command Palette"
+    class="fixed inset-0 z-50 hidden items-start justify-center pt-[12vh] px-4 bg-black/70 backdrop-blur-sm"
+  >
+    <div class="w-full max-w-xl rounded-lg border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-surface shadow-2xl overflow-hidden">
+      <!-- Command Input -->
+      <div class="flex items-center gap-3 px-4 py-3.5 border-b border-paper-border dark:border-obsidian-border">
+        <span class="font-mono text-paper-accent dark:text-obsidian-accent font-bold">&gt;_</span>
+        <input
+          id="cmdInput"
+          type="text"
+          autocomplete="off"
+          placeholder="Jump to section, open SYS-01..03, toggle theme, or copy..."
+          class="w-full bg-transparent text-sm font-mono focus:outline-none placeholder-paper-muted dark:placeholder-obsidian-muted"
+        />
+        <kbd class="px-1.5 py-0.5 rounded border border-paper-border dark:border-obsidian-border font-mono text-[10px] text-paper-muted dark:text-obsidian-muted">ESC</kbd>
+      </div>
+
+      <!-- Command List -->
+      <div id="cmdList" class="max-h-80 overflow-y-auto p-2 space-y-1 font-mono text-xs"></div>
+
+      <!-- Palette Footer -->
+      <div class="px-4 py-2.5 border-t border-paper-border dark:border-obsidian-border bg-black/[0.03] dark:bg-white/[0.02] flex items-center justify-between font-mono text-[10px] text-paper-muted dark:text-obsidian-muted">
+        <span>↑↓ NAVIGATE · ↵ EXECUTE</span>
+        <span>VIKAS // SYS.ENG</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       TOAST NOTIFICATION
+  ========================================================================== -->
+  <div
+    id="toast"
+    role="status"
+    aria-live="polite"
+    class="fixed bottom-5 right-5 z-50 hidden items-center gap-3 px-4 py-3 rounded-md border border-paper-accent dark:border-obsidian-accent bg-obsidian-surface text-obsidian-text shadow-2xl font-mono text-xs"
+  >
+    <span class="w-2 h-2 rounded-full bg-status shrink-0"></span>
+    <span id="toastMsg">OK // Action completed.</span>
+  </div>
+
+  <!-- =========================================================================
+       APPLICATION SCRIPT
+  ========================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      // -----------------------------------------------------------------------
+      // 1. FLAGSHIP SYSTEMS DATA (Strictly 3 Projects: SYS-01, SYS-02, SYS-03)
+      // -----------------------------------------------------------------------
+      const SYSTEMS = [
+        {
+          id: 'SYS-01',
+          category: 'AI & Backend',
+          title: 'Enterprise Knowledge Base & Document RAG',
+          summary:
+            'Multi-tenant document ingestion and semantic search backend using FastAPI, PostgreSQL with pgvector, Celery, Redis, and Role-Based Access Control (RBAC).',
+          tags: ['FastAPI', 'PostgreSQL', 'pgvector', 'Celery', 'Redis', 'RBAC'],
+          diagram: [
+            { step: '01', label: 'FastAPI Ingestion & Query Gateway', meta: 'Pydantic Validation + JWT Auth' },
+            { step: '02', label: 'Async Embedding Pipeline', meta: 'Redis Broker -> Celery Workers -> Chunking' },
+            { step: '03', label: 'PostgreSQL + pgvector Store', meta: 'HNSW Vector Index + Tenant Metadata' },
+            { step: '04', label: 'RBAC-Filtered Synthesis', meta: 'Scoped Top-K Context -> Grounded LLM Output' },
+          ],
+          decisions: [
+            'Offloaded document parsing, recursive chunking, and dense embedding generation to asynchronous Celery workers backed by Redis to keep API latencies sub-100ms.',
+            'Enforced strict multi-tenant Role-Based Access Control (RBAC) directly inside SQL/pgvector retrieval queries prior to context assembly, preventing cross-tenant leakage.',
+            'Structured modular FastAPI routers with explicit Pydantic request/response contracts for clean observability and horizontal worker scaling.',
+            'Combined metadata pre-filtering with cosine similarity scoring to balance retrieval recall and grounded generation precision.',
+          ],
+        },
+        {
+          id: 'SYS-02',
+          category: 'Systems',
+          title: 'Zero-Dependency Smart Campus Helpdesk',
+          summary:
+            'Lightweight HTTP server and ticket routing engine built strictly with Node.js core modules (http, fs, events, buffer, os, path) and zero external npm packages.',
+          tags: ['Node.js', 'http', 'fs', 'events', 'buffer', 'os', 'path'],
+          diagram: [
+            { step: '01', label: 'Native HTTP Server', meta: 'Node.js http.createServer() Custom Router' },
+            { step: '02', label: 'Stream & Buffer Parser', meta: 'Chunked Payload Assembly via Buffer' },
+            { step: '03', label: 'Event-Driven Ticket Bus', meta: 'EventEmitter Lifecycle Hooks + os Telemetry' },
+            { step: '04', label: 'Deterministic File Store', meta: 'Atomic Read/Write via fs & path Primitives' },
+          ],
+          decisions: [
+            'Eliminated 100% of third-party npm dependencies to minimize memory footprint, cold-start latency, and supply-chain surface area.',
+            'Implemented raw request stream aggregation using native Buffer chunks with explicit payload size bounds to guard against memory exhaustion.',
+            'Decoupled ticket state transitions and audit logging through a custom EventEmitter bus while surfacing live host CPU/memory metrics via os.',
+          ],
+        },
+        {
+          id: 'SYS-03',
+          category: 'Algorithms',
+          title: '8-Puzzle State-Space Search Engine',
+          summary:
+            'Algorithmic solver benchmarking Breadth-First Search, Depth-Limited DFS, Uniform Cost Search, and A* Search using Manhattan Distance heuristics.',
+          tags: ['Python', 'A* Search', 'Manhattan Heuristic', 'BFS', 'DLS-DFS', 'UCS'],
+          diagram: [
+            { step: '01', label: 'State Validator', meta: 'Inversion-Parity Solvability Pre-Check' },
+            { step: '02', label: 'Unified Search Engine', meta: 'Queue (BFS) | Stack (DLS) | Min-Heap (UCS & A*)' },
+            { step: '03', label: 'Heuristic Evaluator', meta: 'Admissible Manhattan Distance f(n) = g(n) + h(n)' },
+            { step: '04', label: 'Benchmark Reporter', meta: 'Nodes Expanded, Peak Frontier & Optimal Path' },
+          ],
+          decisions: [
+            'Added an O(n^2) inversion-parity check upfront to deterministically reject unsolvable 3x3 board states before allocating frontier memory.',
+            'Verified admissibility and consistency of the Manhattan Distance heuristic so A* guarantees shortest-path optimality while drastically pruning expanded nodes.',
+            'Designed a unified frontier abstraction to benchmark BFS, Depth-Limited DFS, UCS, and A* under identical state-encoding and timing harnesses.',
+          ],
+        },
+      ];
+
+      // -----------------------------------------------------------------------
+      // 2. RAG.FLOW INTERACTIVE STAGES DATA
+      // -----------------------------------------------------------------------
+      const RAG_STAGES = {
+        ingest: {
+          title: '01 // DOCUMENT INGESTION',
+          desc: 'Accepts multi-tenant documents via FastAPI endpoints, validates metadata schemas, and dispatches non-blocking ingestion jobs to Celery.',
+        },
+        chunk: {
+          title: '02 // CHUNK & EMBED',
+          desc: 'Celery workers consume jobs from Redis, split documents into overlapping semantic windows, and compute dense vector embeddings.',
+        },
+        pgvector: {
+          title: '03 // PGVECTOR INDEX',
+          desc: 'Persists document chunks, access-control tags, and embeddings inside PostgreSQL indexed with pgvector for fast approximate nearest-neighbor lookup.',
+        },
+        rbac: {
+          title: '04 // RBAC FILTER',
+          desc: 'Applies JWT-verified tenant and role predicates at query time so unauthorized chunks are excluded before similarity ranking completes.',
+        },
+        synthesis: {
+          title: '05 // LLM SYNTHESIS',
+          desc: 'Assembles the top-ranked authorized context window with source identifiers to produce grounded, low-hallucination responses.',
+        },
+      };
+
+      // -----------------------------------------------------------------------
+      // 3. TOAST & CLIPBOARD UTILITIES (No alert/confirm, iframe-safe copy)
+      // -----------------------------------------------------------------------
+      let toastTimer = null;
+      function showToast(message) {
+        const toast = document.getElementById('toast');
+        const toastMsg = document.getElementById('toastMsg');
+        if (!toast || !toastMsg) return;
+        toastMsg.textContent = 'OK // ' + message;
+        toast.classList.remove('hidden');
+        toast.classList.add('flex');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toast.classList.add('hidden');
+          toast.classList.remove('flex');
+        }, 2800);
+      }
+
+      function copyToClipboard(text, feedback, btnEl) {
+        try {
+          const textarea = document.createElement('textarea');
+          textarea.value = text;
+          textarea.setAttribute('readonly', '');
+          textarea.style.position = 'absolute';
+          textarea.style.left = '-9999px';
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          showToast(feedback || 'Copied to clipboard');
+
+          if (btnEl && btnEl.id === 'contactCopyEmailBtn') {
+            const orig = btnEl.textContent;
+            btnEl.textContent = 'COPIED';
+            btnEl.classList.add('border-status', 'text-status');
+            setTimeout(() => {
+              btnEl.textContent = orig;
+              btnEl.classList.remove('border-status', 'text-status');
+            }, 1800);
+          }
+        } catch (err) {
+          showToast(text);
+        }
+      }
+
+      document.querySelectorAll('.copy-trigger').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          copyToClipboard(
+            btn.getAttribute('data-copy'),
+            btn.getAttribute('data-copy-label'),
+            btn
+          );
+        });
+      });
+
+      // -----------------------------------------------------------------------
+      // 4. DUAL THEME TOGGLE (Obsidian Dark Default / Drafting Paper Light)
+      // -----------------------------------------------------------------------
+      const htmlEl = document.documentElement;
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
+      const themeDarkLabel = document.getElementById('themeDarkLabel');
+      const themePaperLabel = document.getElementById('themePaperLabel');
+
+      function updateThemeLabels() {
+        const isDark = htmlEl.classList.contains('dark');
+        if (themeDarkLabel && themePaperLabel) {
+          themeDarkLabel.className = isDark
+            ? 'text-paper-text dark:text-obsidian-text'
+            : 'text-paper-muted dark:text-obsidian-muted';
+          themePaperLabel.className = isDark
+            ? 'text-paper-muted dark:text-obsidian-muted'
+            : 'text-paper-text dark:text-obsidian-text';
+        }
+      }
+
+      function toggleTheme() {
+        const isDark = htmlEl.classList.toggle('dark');
+        updateThemeLabels();
+        try {
+          localStorage.setItem('vikas-sys-theme', isDark ? 'dark' : 'light');
+        } catch (e) {}
+        showToast(isDark ? 'Theme: OBSIDIAN DARK' : 'Theme: DRAFTING PAPER');
+      }
+
+      (function initTheme() {
+        try {
+          const saved = localStorage.getItem('vikas-sys-theme');
+          if (saved === 'light') {
+            htmlEl.classList.remove('dark');
+          } else {
+            htmlEl.classList.add('dark');
+          }
+        } catch (e) {
+          htmlEl.classList.add('dark');
+        }
+        updateThemeLabels();
+      })();
+
+      if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', toggleTheme);
+      }
+
+      // -----------------------------------------------------------------------
+      // 5. MOBILE NAVIGATION MENU
+      // -----------------------------------------------------------------------
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const mobileIconOpen = document.getElementById('mobileIconOpen');
+      const mobileIconClose = document.getElementById('mobileIconClose');
+
+      function setMobileMenu(open) {
+        if (!mobileMenu || !mobileMenuBtn) return;
+        mobileMenu.classList.toggle('hidden', !open);
+        mobileIconOpen.classList.toggle('hidden', open);
+        mobileIconClose.classList.toggle('hidden', !open);
+        mobileMenuBtn.setAttribute('aria-expanded', String(open));
+      }
+
+      if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', () => {
+          setMobileMenu(mobileMenu.classList.contains('hidden'));
+        });
+      }
+      document.querySelectorAll('.mobile-nav-link').forEach((link) => {
+        link.addEventListener('click', () => setMobileMenu(false));
+      });
+
+      // -----------------------------------------------------------------------
+      // 6. HERO SPEC CARD TABS & RAG.FLOW INTERACTIVITY
+      // -----------------------------------------------------------------------
+      const specTabBtns = document.querySelectorAll('.spec-tab-btn');
+      const panelSysInfo = document.getElementById('spec-panel-sysinfo');
+      const panelRagFlow = document.getElementById('spec-panel-ragflow');
+
+      specTabBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const tab = btn.getAttribute('data-spec-tab');
+          specTabBtns.forEach((b) => {
+            b.classList.remove('bg-paper-accent', 'dark:bg-obsidian-accent', 'text-white', 'font-semibold');
+            b.classList.add('text-paper-muted', 'dark:text-obsidian-muted');
+            b.setAttribute('aria-selected', 'false');
+          });
+          btn.classList.add('bg-paper-accent', 'dark:bg-obsidian-accent', 'text-white', 'font-semibold');
+          btn.classList.remove('text-paper-muted', 'dark:text-obsidian-muted');
+          btn.setAttribute('aria-selected', 'true');
+
+          panelSysInfo.classList.toggle('hidden', tab !== 'sysinfo');
+          panelRagFlow.classList.toggle('hidden', tab !== 'ragflow');
+        });
+      });
+
+      const ragNodes = document.querySelectorAll('.rag-node');
+      const ragStageTitle = document.getElementById('ragStageTitle');
+      const ragStageDesc = document.getElementById('ragStageDesc');
+
+      function highlightRagStage(node) {
+        const key = node.getAttribute('data-stage');
+        const info = RAG_STAGES[key];
+        if (!info) return;
+
+        ragNodes.forEach((n) => {
+          n.classList.remove('border-paper-accent', 'dark:border-obsidian-accent', 'bg-paper-accent/10', 'dark:bg-obsidian-accent/10');
+          n.classList.add('border-paper-border', 'dark:border-obsidian-border', 'bg-paper-bg', 'dark:bg-obsidian-bg');
+        });
+        node.classList.add('border-paper-accent', 'dark:border-obsidian-accent', 'bg-paper-accent/10', 'dark:bg-obsidian-accent/10');
+        node.classList.remove('border-paper-border', 'dark:border-obsidian-border', 'bg-paper-bg', 'dark:bg-obsidian-bg');
+
+        ragStageTitle.textContent = info.title;
+        ragStageDesc.textContent = info.desc;
+      }
+
+      ragNodes.forEach((node) => {
+        node.addEventListener('mouseenter', () => highlightRagStage(node));
+        node.addEventListener('click', () => highlightRagStage(node));
+      });
+
+      // -----------------------------------------------------------------------
+      // 7. RENDER 3 FLAGSHIP SYSTEMS & FILTERING
+      // -----------------------------------------------------------------------
+      const systemsGrid = document.getElementById('systemsGrid');
+      const filterBtns = document.querySelectorAll('.sys-filter-btn');
+
+      function renderSystems(category) {
+        if (!systemsGrid) return;
+        const filtered =
+          category === 'ALL'
+            ? SYSTEMS
+            : SYSTEMS.filter((s) => s.category === category);
+
+        systemsGrid.innerHTML = filtered
+          .map(
+            (sys) => `
+          <article class="flex flex-col justify-between p-6 rounded-lg border border-paper-border dark:border-obsidian-border bg-paper-surface/80 dark:bg-obsidian-surface/80 hover:border-paper-accent dark:hover:border-obsidian-accent transition-all duration-200 group">
+            <div>
+              <div class="flex items-center justify-between gap-2 pb-4 mb-4 border-b border-paper-border dark:border-obsidian-border font-mono text-[11px]">
+                <span class="font-bold text-paper-accent dark:text-obsidian-accent">${sys.id}</span>
+                <span class="text-paper-muted dark:text-obsidian-muted uppercase tracking-wider">${sys.category}</span>
+              </div>
+
+              <h3 class="font-display text-xl font-bold leading-snug mb-3 group-hover:text-paper-accent dark:group-hover:text-obsidian-accent transition-colors">
+                ${sys.title}
+              </h3>
+
+              <p class="text-sm text-paper-muted dark:text-obsidian-muted leading-relaxed mb-5">
+                ${sys.summary}
+              </p>
+            </div>
+
+            <div class="space-y-4">
+              <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+                ${sys.tags
+                  .map(
+                    (tag) =>
+                      `<span class="px-2 py-1 rounded border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg">${tag}</span>`
+                  )
+                  .join('')}
+              </div>
+
+              <button
+                type="button"
+                data-open-sys="${sys.id}"
+                class="open-dossier-btn w-full flex items-center justify-between px-4 py-2.5 rounded-md border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg group-hover:bg-paper-accent dark:group-hover:bg-obsidian-accent group-hover:border-paper-accent dark:group-hover:border-obsidian-accent group-hover:text-white font-mono text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer"
+              >
+                <span>Inspect Architecture</span>
+                <span>→</span>
+              </button>
+            </div>
+          </article>
+        `
+          )
+          .join('');
+
+        systemsGrid.querySelectorAll('.open-dossier-btn').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            openDossier(btn.getAttribute('data-open-sys'));
+          });
+        });
+      }
+
+      filterBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const cat = btn.getAttribute('data-filter');
+          filterBtns.forEach((b) => {
+            b.classList.remove('bg-paper-accent', 'dark:bg-obsidian-accent', 'text-white', 'font-semibold');
+            b.classList.add(
+              'border',
+              'border-paper-border',
+              'dark:border-obsidian-border',
+              'bg-paper-surface',
+              'dark:bg-obsidian-surface',
+              'text-paper-muted',
+              'dark:text-obsidian-muted'
+            );
+          });
+          btn.classList.add('bg-paper-accent', 'dark:bg-obsidian-accent', 'text-white', 'font-semibold');
+          btn.classList.remove(
+            'border',
+            'border-paper-border',
+            'dark:border-obsidian-border',
+            'bg-paper-surface',
+            'dark:bg-obsidian-surface',
+            'text-paper-muted',
+            'dark:text-obsidian-muted'
+          );
+          renderSystems(cat);
+        });
+      });
+
+      renderSystems('ALL');
+
+      // -----------------------------------------------------------------------
+      // 8. SLIDE-OVER TECHNICAL DOSSIER DRAWER
+      // -----------------------------------------------------------------------
+      const dossierOverlay = document.getElementById('dossierOverlay');
+      const dossierPanel = document.getElementById('dossierPanel');
+      const closeDossierBtn = document.getElementById('closeDossierBtn');
+      const closeDossierFooterBtn = document.getElementById('closeDossierFooterBtn');
+
+      function openDossier(sysId) {
+        const sys = SYSTEMS.find((s) => s.id === sysId);
+        if (!sys || !dossierOverlay || !dossierPanel) return;
+
+        document.getElementById('dossierId').textContent = sys.id;
+        document.getElementById('dossierCategory').textContent = sys.category;
+        document.getElementById('dossierTitle').textContent = sys.title;
+        document.getElementById('dossierSummary').textContent = sys.summary;
+
+        document.getElementById('dossierDiagram').innerHTML = sys.diagram
+          .map(
+            (node, idx) => `
+          <div class="p-3 rounded-md border border-paper-border dark:border-obsidian-border bg-paper-bg dark:bg-obsidian-bg flex flex-col sm:flex-row sm:items-center justify-between gap-1 font-mono text-xs">
+            <span class="font-semibold"><span class="text-paper-accent dark:text-obsidian-accent mr-2">${node.step}</span>${node.label}</span>
+            <span class="text-[11px] text-paper-muted dark:text-obsidian-muted">${node.meta}</span>
+          </div>
+          ${
+            idx < sys.diagram.length - 1
+              ? '<div class="flex justify-center font-mono text-xs text-paper-accent dark:text-obsidian-accent" aria-hidden="true">↓</div>'
+              : ''
+          }
+        `
+          )
+          .join('');
+
+        document.getElementById('dossierDecisions').innerHTML = sys.decisions
+          .map(
+            (item) => `
+          <li class="flex items-start gap-3">
+            <span class="mt-2 w-1.5 h-1.5 rounded-sm bg-paper-accent dark:bg-obsidian-accent shrink-0"></span>
+            <span class="text-paper-muted dark:text-obsidian-muted">${item}</span>
+          </li>
+        `
+          )
+          .join('');
+
+        document.getElementById('dossierTags').innerHTML = sys.tags
+          .map(
+            (t) =>
+              `<span class="px-2.5 py-1 rounded border border-paper-border dark:border-obsidian-border bg-paper-surface dark:bg-obsidian-surface">${t}</span>`
+          )
+          .join('');
+
+        dossierOverlay.classList.remove('hidden');
+        dossierOverlay.classList.add('flex');
+        document.body.classList.add('overflow-hidden');
+
+        requestAnimationFrame(() => {
+          dossierPanel.classList.remove('translate-x-full');
+          dossierPanel.classList.add('translate-x-0');
+        });
+      }
+
+      function closeDossier() {
+        if (!dossierOverlay || !dossierPanel) return;
+        dossierPanel.classList.add('translate-x-full');
+        dossierPanel.classList.remove('translate-x-0');
+        setTimeout(() => {
+          dossierOverlay.classList.add('hidden');
+          dossierOverlay.classList.remove('flex');
+          document.body.classList.remove('overflow-hidden');
+        }, 250);
+      }
+
+      if (closeDossierBtn) closeDossierBtn.addEventListener('click', closeDossier);
+      if (closeDossierFooterBtn) closeDossierFooterBtn.addEventListener('click', closeDossier);
+      if (dossierOverlay) {
+        dossierOverlay.addEventListener('click', (e) => {
+          if (e.target === dossierOverlay) closeDossier();
+        });
+      }
+
+      // -----------------------------------------------------------------------
+      // 9. COMMAND PALETTE MODAL (⌘K / Ctrl+K)
+      // -----------------------------------------------------------------------
+      const cmdOverlay = document.getElementById('cmdOverlay');
+      const cmdInput = document.getElementById('cmdInput');
+      const cmdList = document.getElementById('cmdList');
+      const cmdPaletteBtn = document.getElementById('cmdPaletteBtn');
+      const footerCmdBtn = document.getElementById('footerCmdBtn');
+
+      let activeCmdIdx = 0;
+      let filteredCommands = [];
+
+      const COMMANDS = [
+        { group: 'SECTION', label: '01 // Jump to About & Stack', action: () => scrollToSection('#about') },
+        { group: 'SECTION', label: '02 // Jump to Selected Systems', action: () => scrollToSection('#systems') },
+        { group: 'SECTION', label: '03 // Jump to Engineering Milestones', action: () => scrollToSection('#milestones') },
+        { group: 'SECTION', label: '04 // Jump to Contact', action: () => scrollToSection('#contact') },
+        ...SYSTEMS.map((s) => ({
+          group: 'DOSSIER',
+          label: `Open ${s.id}: ${s.title}`,
+          action: () => openDossier(s.id),
+        })),
+        { group: 'THEME', label: 'Toggle Theme (Obsidian Dark / Drafting Paper)', action: () => toggleTheme() },
+        { group: 'COPY', label: 'Copy Email (vikas.dev@example.com)', action: () => copyToClipboard('vikas.dev@example.com', 'Email copied: vikas.dev@example.com') },
+        { group: 'COPY', label: 'Copy GitHub URL (github.com/Vikas-hub-web)', action: () => copyToClipboard('https://github.com/Vikas-hub-web', 'GitHub URL copied') },
+      ];
+
+      function scrollToSection(selector) {
+        const el = document.querySelector(selector);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+
+      function renderCommands(query) {
+        const q = (query || '').trim().toLowerCase();
+        filteredCommands = q
+          ? COMMANDS.filter(
+              (c) => c.label.toLowerCase().includes(q) || c.group.toLowerCase().includes(q)
+            )
+          : COMMANDS;
+
+        activeCmdIdx = 0;
+
+        if (!filteredCommands.length) {
+          cmdList.innerHTML =
+            '<div class="px-3 py-6 text-center text-paper-muted dark:text-obsidian-muted">NO MATCHING COMMANDS</div>';
+          return;
+        }
+
+        cmdList.innerHTML = filteredCommands
+          .map(
+            (cmd, i) => `
+          <button
+            type="button"
+            data-cmd-idx="${i}"
+            class="cmd-item w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-md text-left transition-colors cursor-pointer ${
+              i === activeCmdIdx
+                ? 'bg-paper-accent dark:bg-obsidian-accent text-white'
+                : 'hover:bg-black/5 dark:hover:bg-white/5 text-paper-text dark:text-obsidian-text'
+            }"
+          >
+            <span class="truncate">${cmd.label}</span>
+            <span class="shrink-0 text-[10px] uppercase opacity-75">${cmd.group}</span>
+          </button>
+        `
+          )
+          .join('');
+
+        cmdList.querySelectorAll('.cmd-item').forEach((item) => {
+          item.addEventListener('click', () => {
+            executeCommand(Number(item.getAttribute('data-cmd-idx')));
+          });
+        });
+      }
+
+      function highlightCommand(idx) {
+        const items = cmdList.querySelectorAll('.cmd-item');
+        items.forEach((el, i) => {
+          if (i === idx) {
+            el.classList.add('bg-paper-accent', 'dark:bg-obsidian-accent', 'text-white');
+            el.classList.remove('hover:bg-black/5', 'dark:hover:bg-white/5', 'text-paper-text', 'dark:text-obsidian-text');
+            el.scrollIntoView({ block: 'nearest' });
+          } else {
+            el.classList.remove('bg-paper-accent', 'dark:bg-obsidian-accent', 'text-white');
+            el.classList.add('hover:bg-black/5', 'dark:hover:bg-white/5', 'text-paper-text', 'dark:text-obsidian-text');
+          }
+        });
+      }
+
+      function executeCommand(idx) {
+        const cmd = filteredCommands[idx];
+        closeCmdPalette();
+        if (cmd && typeof cmd.action === 'function') {
+          cmd.action();
+        }
+      }
+
+      function openCmdPalette() {
+        if (!cmdOverlay) return;
+        cmdOverlay.classList.remove('hidden');
+        cmdOverlay.classList.add('flex');
+        document.body.classList.add('overflow-hidden');
+        cmdInput.value = '';
+        renderCommands('');
+        setTimeout(() => cmdInput.focus(), 20);
+      }
+
+      function closeCmdPalette() {
+        if (!cmdOverlay) return;
+        cmdOverlay.classList.add('hidden');
+        cmdOverlay.classList.remove('flex');
+        if (dossierOverlay && dossierOverlay.classList.contains('hidden')) {
+          document.body.classList.remove('overflow-hidden');
+        }
+      }
+
+      if (cmdPaletteBtn) cmdPaletteBtn.addEventListener('click', openCmdPalette);
+      if (footerCmdBtn) footerCmdBtn.addEventListener('click', openCmdPalette);
+      if (cmdOverlay) {
+        cmdOverlay.addEventListener('click', (e) => {
+          if (e.target === cmdOverlay) closeCmdPalette();
+        });
+      }
+      if (cmdInput) {
+        cmdInput.addEventListener('input', (e) => renderCommands(e.target.value));
+      }
+
+      // Global Keyboard Shortcuts
+      document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+          e.preventDefault();
+          cmdOverlay.classList.contains('hidden') ? openCmdPalette() : closeCmdPalette();
+          return;
+        }
+
+        if (e.key === 'Escape') {
+          if (!cmdOverlay.classList.contains('hidden')) {
+            closeCmdPalette();
+          } else if (!dossierOverlay.classList.contains('hidden')) {
+            closeDossier();
+          }
+          return;
+        }
+
+        if (!cmdOverlay.classList.contains('hidden') && filteredCommands.length > 0) {
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            activeCmdIdx = (activeCmdIdx + 1) % filteredCommands.length;
+            highlightCommand(activeCmdIdx);
+          } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            activeCmdIdx = (activeCmdIdx - 1 + filteredCommands.length) % filteredCommands.length;
+            highlightCommand(activeCmdIdx);
+          } else if (e.key === 'Enter') {
+            e.preventDefault();
+            executeCommand(activeCmdIdx);
+          }
+        }
+      });
+
+      // -----------------------------------------------------------------------
+      // 10. CLIENT-SIDE VALIDATED CONTACT FORM
+      // -----------------------------------------------------------------------
+      const contactForm = document.getElementById('contactForm');
+      if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+
+          const nameVal = document.getElementById('senderName').value.trim();
+          const emailVal = document.getElementById('senderEmail').value.trim();
+          const msgVal = document.getElementById('senderMessage').value.trim();
+
+          const errName = document.getElementById('errName');
+          const errEmail = document.getElementById('errEmail');
+          const errMessage = document.getElementById('errMessage');
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+          let isValid = true;
+
+          if (nameVal.length < 2) {
+            errName.classList.remove('hidden');
+            isValid = false;
+          } else {
+            errName.classList.add('hidden');
+          }
+
+          if (!emailRegex.test(emailVal)) {
+            errEmail.classList.remove('hidden');
+            isValid = false;
+          } else {
+            errEmail.classList.add('hidden');
+          }
+
+          if (msgVal.length < 10) {
+            errMessage.classList.remove('hidden');
+            isValid = false;
+          } else {
+            errMessage.classList.add('hidden');
+          }
+
+          if (isValid) {
+            contactForm.reset();
+            showToast('Message transmitted from ' + nameVal + '.');
+          }
+        });
+      }
+
+      // -----------------------------------------------------------------------
+      // 11. SCROLL REVEAL (IntersectionObserver)
+      // -----------------------------------------------------------------------
+      const revealBlocks = document.querySelectorAll('.reveal-block');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.remove('opacity-0', 'translate-y-4');
+                entry.target.classList.add('opacity-100', 'translate-y-0');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.08 }
+        );
+        revealBlocks.forEach((block) => io.observe(block));
+      } else {
+        revealBlocks.forEach((block) => {
+          block.classList.remove('opacity-0', 'translate-y-4');
+          block.classList.add('opacity-100', 'translate-y-0');
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
